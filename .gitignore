@@ -1,4 +1,6 @@
 # Служебные файлы
 tools/probe.html
+tools/docx-view.html
+tools/docx-media/
 .DS_Store
 Thumbs.db
