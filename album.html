@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Альбом — Александра Ткачук</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230e0e0e'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-family='Georgia'%3E%D0%90%D0%A2%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=3">
+  <link rel="stylesheet" href="css/album.css?v=3">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body class="album-body">
+
+  <header class="album-header">
+    <a href="index.html#projects" class="album-back">← Портфолио</a>
+    <div class="album-title-wrap">
+      <h1 class="album-title" id="album-title">…</h1>
+      <p class="album-tag" id="album-tag"></p>
+    </div>
+    <span class="album-counter" id="album-counter"></span>
+  </header>
+
+  <main class="album-main" id="album-main">
+    <div class="album-loader" id="album-loader">
+      <div class="album-loader-bar"><span></span></div>
+      <p id="album-loader-text">Загрузка альбома…</p>
+    </div>
+    <!-- листы альбома рендерятся из js/album.js -->
+  </main>
+
+  <nav class="album-nextnav" id="album-nextnav">
+    <a href="#" id="album-next-link">
+      <span class="album-next-label">Следующий проект</span>
+      <span class="album-next-title" id="album-next-title"></span>
+      <span class="album-next-arrow">→</span>
+    </a>
+  </nav>
+
+  <footer class="album-footer">
+    <a href="index.html#projects">← Все проекты</a>
+    <span>© 2026 Александра Ткачук</span>
+  </footer>
+
+  <script src="js/projects-data.js?v=3"></script>
+  <script src="js/album.js?v=3"></script>
+</body>
+</html>
