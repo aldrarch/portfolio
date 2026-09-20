@@ -221,3 +221,90 @@ p { margin: 0 0 1em; }
   .lb-prev, .lb-next { top: auto; bottom: 20px; transform: none; }
   .lb-prev { left: 20px; } .lb-next { right: 20px; }
 }
+
+/* ---------- Плашка «Опыт работы» ---------- */
+.xp-plate {
+  margin-top: 40px; padding: 28px 32px;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.xp-plate-title { font-size: 1.15rem; font-weight: 600; margin: 6px 0 4px; }
+.xp-plate-sub { color: var(--muted); font-size: .95rem; }
+
+/* ---------- Внутренние страницы ---------- */
+.page-head { padding-bottom: 8px; }
+.page-lead { max-width: 660px; color: var(--muted); font-size: 1.05rem; line-height: 1.65; margin-top: 14px; }
+.section-flush { padding-top: 8px; }
+.nav a.is-current { color: var(--ink); font-weight: 600; }
+.all-link { margin-top: 36px; text-align: center; }
+
+/* ---------- Таймлайн опыта ---------- */
+.timeline { list-style: none; margin: 0; padding: 0; position: relative; }
+.timeline::before {
+  content: ""; position: absolute; left: 5px; top: 8px; bottom: 8px; width: 2px;
+  background: var(--line);
+}
+.xp-item { position: relative; padding: 0 0 44px 36px; }
+.xp-item:last-child { padding-bottom: 0; }
+.xp-item::before {
+  content: ""; position: absolute; left: 0; top: 7px; width: 12px; height: 12px; border-radius: 50%;
+  background: var(--accent); box-shadow: 0 0 0 4px var(--bg);
+}
+.xp-meta { display: flex; flex-direction: column; gap: 2px; margin-bottom: 10px; }
+.xp-period { font-weight: 600; font-size: .92rem; }
+.xp-place { color: var(--muted); font-size: .9rem; }
+.xp-main h2 { font-size: 1.35rem; margin: 0 0 12px; }
+.xp-soft { color: var(--muted); font-weight: 400; font-size: 1.05rem; }
+.xp-main ul { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.7; max-width: 760px; }
+.xp-main li { margin-bottom: 5px; }
+.xp-main li::marker { color: var(--accent); }
+
+/* ---------- Образование ---------- */
+.edu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 28px; }
+.edu-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 26px; }
+.edu-card h3 { font-size: 1.05rem; margin: 0 0 8px; line-height: 1.45; }
+.edu-meta { color: var(--muted); font-size: .92rem; margin: 0 0 8px; }
+.edu-card em { font-style: normal; font-size: .92rem; color: var(--ink); opacity: .75; }
+
+/* ---------- Листы альбома (projects.html) ---------- */
+.sheets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 30px; }
+.sheet { margin: 0; cursor: pointer; transition: transform .25s ease; outline: none; }
+.sheet:hover, .sheet:focus-visible { transform: translateY(-4px); }
+.sheet-media {
+  aspect-ratio: 4 / 3; background: #fff; border: 1px solid var(--line); border-radius: 6px;
+  overflow: hidden; display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--shadow); position: relative;
+}
+.sheet-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sheet-ph { text-align: center; padding: 18px; }
+.sheet-ph span { display: block; font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.sheet-ph strong { display: block; font-size: 1rem; line-height: 1.4; }
+.sheet-ph em { display: block; font-style: normal; color: var(--muted); font-size: .85rem; margin-top: 6px; }
+.sheet figcaption { display: flex; align-items: baseline; gap: 10px; padding: 10px 2px 0; }
+.sheet-num { font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.sheet-title { font-weight: 600; font-size: .95rem; line-height: 1.4; }
+.sheet-tag { margin-left: auto; color: var(--muted); font-size: .8rem; white-space: nowrap; }
+.sheet.is-hidden { display: none; }
+
+/* ---------- Лайтбокс: расширения ---------- */
+.lb-canvas-holder img { max-height: 82vh; max-width: 100%; object-fit: contain; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,.4); }
+.lb-loading { color: #cbd2da; font-size: .95rem; padding: 60px 20px; }
+.lb-loading a { color: #fff; }
+.lb-caption { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; justify-content: center; margin-top: 14px; }
+.lb-caption strong { color: #fff; font-size: 1rem; }
+.lb-caption span { color: #cbd2da; font-size: .9rem; }
+.lb-counter { font-variant-numeric: tabular-nums; letter-spacing: .08em; }
+.lb-album { color: #fff; font-size: .9rem; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- Responsive: новые блоки ---------- */
+@media (max-width: 1020px) {
+  .sheets { grid-template-columns: repeat(2, 1fr); }
+  .edu-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+  .sheets { grid-template-columns: 1fr; gap: 22px; }
+  .xp-item { padding-left: 28px; }
+  .xp-plate { padding: 22px; }
+  .lightbox { padding: 16px; }
+}

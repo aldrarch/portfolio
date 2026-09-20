@@ -1,8 +1,19 @@
 /* Единый список проектов — используется главной страницей и альбомом.
    Чтобы добавить проект: скопируйте блок и поменяйте поля.
-   cat: architecture / structures / graphics / research (фильтры на главной) */
+   cat: portfolio / architecture / structures / graphics / research / practice / diploma
+   (фильтры на главной и на projects.html) */
 
 const PROJECTS = [
+  {
+    id: "portfolio-2026",
+    title: "Архитектурное портфолио",
+    tag: "Сводный альбом · 2026",
+    cat: ["portfolio", "graphics"],
+    desc: "Сводный альбом: программы и опыт работы, двухэтажный выставочный павильон, АЗС и другие ключевые работы — 10 листов.",
+    tools: "Revit · Lumion · Photoshop · InDesign",
+    type: "pdf",
+    src: "assets/albums/portfolio-2026.pdf"
+  },
   {
     id: "diplom",
     title: "Центр освоения Марса в наукограде Кольцово",
@@ -152,7 +163,7 @@ const PROJECTS = [
     id: "practice",
     title: "Отчёт по производственной практике",
     tag: "5 курс · Практика",
-    cat: ["research", "architecture"],
+    cat: ["research", "architecture", "practice"],
     desc: "Производственная практика: задачи, инструмент, результаты, работа с генпланом и топоосновой — 95 листов.",
     tools: "Генплан · съёмка территории",
     type: "pdf",
@@ -163,7 +174,7 @@ const PROJECTS = [
     id: "practice2",
     title: "Отчёт по учебной практике",
     tag: "3 курс · Практика",
-    cat: ["research"],
+    cat: ["research", "practice"],
     desc: "Ознакомительная практика: подземные сооружения, экскурсия на производство Rehau, индивидуальное задание — 16 листов.",
     tools: "Отчёт · дневник",
     type: "pdf",

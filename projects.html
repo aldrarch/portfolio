@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Все проекты — альбом | Александра Ткачук</title>
+  <meta name="description" content="Все проекты Александры Ткачук одним альбомом: портфолио, диплом, курсовые, конструкции, графика. Нажмите на лист, чтобы увеличить, и листайте стрелками.">
+  <meta property="og:title" content="Все проекты — Александра Ткачук">
+  <meta property="og:description" content="Портфолио-альбом: архитектура, конструкции, графика, исследования.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231647e3'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-family='Georgia'%3E%D0%90%D0%A2%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=4">
+</head>
+<body>
+
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">АТ<span class="logo-dot">.</span></a>
+      <nav class="nav">
+        <a href="index.html#about">Обо мне</a>
+        <a href="projects.html" class="is-current">Проекты</a>
+        <a href="experience.html">Опыт</a>
+        <a href="index.html#skills">Навыки</a>
+        <a href="index.html#revit">BIM / Revit</a>
+        <a href="index.html#contacts" class="nav-cta">Контакты</a>
+      </nav>
+      <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="section page-head">
+      <div class="container reveal">
+        <p class="section-overline">Портфолио-альбом</p>
+        <h1>Все проекты</h1>
+        <p class="page-lead">
+          Все работы одним альбомом, как в печатном портфолио. Нажмите на лист,
+          чтобы увеличить его, и листайте альбом стрелками ← → или свайпом.
+        </p>
+      </div>
+    </section>
+
+    <section class="section section-flush">
+      <div class="container">
+        <div class="filters" id="filters">
+          <button class="filter is-active" data-filter="all">Все</button>
+          <button class="filter" data-filter="portfolio">Портфолио</button>
+          <button class="filter" data-filter="diploma">Диплом</button>
+          <button class="filter" data-filter="architecture">Архитектура</button>
+          <button class="filter" data-filter="structures">Конструкции</button>
+          <button class="filter" data-filter="graphics">Графика</button>
+          <button class="filter" data-filter="practice">Практика</button>
+          <button class="filter" data-filter="research">Исследования</button>
+        </div>
+
+        <div class="sheets" id="sheets"><!-- листы рендерятся из js/projects-data.js --></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>© 2026 Александра Ткачук</span>
+      <span>Архитектура · BIM · Revit</span>
+      <a href="#top">Наверх ↑</a>
+    </div>
+  </footer>
+
+  <!-- ЛАЙТБОКС: увеличенный лист -->
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lb-close" id="lbClose" aria-label="Закрыть">×</button>
+    <button class="lb-arrow lb-prev" id="lbPrev" aria-label="Предыдущий лист">‹</button>
+    <figure class="lb-stage">
+      <div class="lb-canvas-holder" id="lbHolder"></div>
+      <figcaption class="lb-caption">
+        <span class="lb-counter" id="lbCounter">01 / 20</span>
+        <strong id="lbTitle"></strong>
+        <span id="lbTag"></span>
+        <a class="lb-album" id="lbAlbum" href="#">Открыть весь альбом →</a>
+      </figcaption>
+    </figure>
+    <button class="lb-arrow lb-next" id="lbNext" aria-label="Следующий лист">›</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="js/projects-data.js?v=4"></script>
+  <script src="js/projects-overview.js?v=4"></script>
+</body>
+</html>

@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=3">
+  <link rel="stylesheet" href="css/style.css?v=4">
 </head>
 <body>
 
@@ -21,7 +21,8 @@
       <a href="index.html" class="logo">АТ<span class="logo-dot">.</span></a>
       <nav class="nav">
         <a href="index.html#about">Обо мне</a>
-        <a href="index.html#projects">Проекты</a>
+        <a href="projects.html">Проекты</a>
+        <a href="experience.html">Опыт</a>
         <a href="index.html#skills">Навыки</a>
         <a href="index.html#revit">BIM / Revit</a>
         <a href="index.html#contacts" class="nav-cta">Контакты</a>
@@ -35,20 +36,20 @@
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-text reveal">
-          <p class="hero-overline">Архитектор · BIM-специалист · Revit</p>
+          <p class="hero-overline">Архитектор · BIM-мастер КР · Revit</p>
           <h1>Александра<br>Ткачук</h1>
           <p class="hero-lead">
-            Выпускной курс НГАХА (НГУАДИ). Проектирую и документирую здания
-            в Revit: от концепции и эскиза до рабочих чертежей, семейств и подач.
-            Ищу первые проекты в архитектурном бюро или BIM-отделе.
+            Выпускница НГУАДИ (Новосибирск), BIM-мастер КР в «ПИК Технологии».
+            Проектирую и документирую здания в Revit: от концепции и эскиза
+            до рабочих чертежей, семейств и подач.
           </p>
           <div class="hero-actions">
             <a href="#projects" class="btn btn-solid">Смотреть проекты</a>
             <a href="#contacts" class="btn btn-ghost">Связаться</a>
           </div>
           <div class="hero-tags">
-            <span>Revit</span><span>Rhino + Rhino.Inside.Revit</span><span>AutoCAD</span>
-            <span>Графический дизайн</span><span>Архитектурная графика</span>
+            <span>Revit</span><span>Navisworks · IFC</span><span>Renga · Archicad</span>
+            <span>Семейства КР</span><span>Lumion</span>
           </div>
         </div>
         <figure class="hero-figure reveal delay-1">
@@ -68,10 +69,10 @@
         </div>
         <div class="about-text reveal delay-1">
           <p>
-            Я — Александра Ткачук, учусь на выпускном курсе архитектурного факультета
-            (НГУАДИ, Омск). За пять лет — от натюрмортов и клаузур до дипломной подачи:
-            дипломный проект, речной вокзал, АЗС с навесом-кафе, интерьер библиотеки,
-            апартаменты, деревянные и металлические конструкции.
+            Я — Александра Ткачук, выпускница НГУАДИ (Новосибирск, 2021–2026,
+            специализация «архитектурное проектирование»). За годы учёбы — от клаузур
+            и макетов до дипломной подачи; с 2023 года — практический опыт в BIM:
+            от моделирования по чертежам до разработки семейств и поддержки команд.
           </p>
           <p>
             В BIM мне ближе всего Revit: создаю параметрические семейства (например,
@@ -81,9 +82,20 @@
           </p>
           <ul class="about-facts">
             <li><strong>Образование</strong>НГУАДИ, архитектура, 2021–2026</li>
-            <li><strong>Фокус</strong>BIM-моделирование, рабочая документация, подачи</li>
-            <li><strong>Готова к</strong>стажировке / junior-позиции в бюро, BIM-отделе</li>
+            <li><strong>Сейчас</strong>BIM-мастер КР · «ПИК Технологии», Москва</li>
+            <li><strong>Опыт</strong>BIM с 2023: ПИК · ТИМ-Элемент · Tiver Group</li>
           </ul>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="xp-plate reveal">
+          <div>
+            <p class="section-overline">Опыт работы</p>
+            <p class="xp-plate-title">BIM-мастер КР · ПИК Технологии, Москва — с февраля 2026</p>
+            <p class="xp-plate-sub">Ранее: АО «ТИМ-Элемент» · Арт.Тэго (архитектор-стажёр) · Tiver Group / Мераком</p>
+          </div>
+          <a class="btn btn-solid" href="experience.html">Смотреть опыт →</a>
         </div>
       </div>
     </section>
@@ -98,14 +110,19 @@
           </div>
           <div class="filters" id="filters">
             <button class="filter is-active" data-filter="all">Все</button>
+            <button class="filter" data-filter="portfolio">Портфолио</button>
+            <button class="filter" data-filter="diploma">Диплом</button>
             <button class="filter" data-filter="architecture">Архитектура</button>
             <button class="filter" data-filter="structures">Конструкции</button>
             <button class="filter" data-filter="graphics">Графика</button>
+            <button class="filter" data-filter="practice">Практика</button>
             <button class="filter" data-filter="research">Исследования</button>
           </div>
         </div>
 
         <div class="cards" id="cards"><!-- карточки рендерятся из js/projects-data.js --></div>
+
+        <p class="all-link reveal"><a class="btn btn-ghost" href="projects.html">Все проекты альбомом →</a></p>
       </div>
     </section>
 
@@ -118,17 +135,17 @@
         </div>
         <div class="skills-grid">
           <div class="skill reveal"><h3>Autodesk Revit</h3>
-            <p>Моделирование зданий, семейства, спецификации, листы и рабочая документация, подача.</p></div>
-          <div class="skill reveal delay-1"><h3>Rhino 3D + Rhino.Inside.Revit</h3>
-            <p>Сложные формы в Rhino прямо внутри Revit; обмен геометрией между средами.</p></div>
-          <div class="skill reveal delay-2"><h3>AutoCAD</h3>
-            <p>Чертежи, подоснова, DXF-обмен, оформление по стандарту.</p></div>
-          <div class="skill reveal"><h3>Графика и подачи</h3>
-            <p>Photoshop, InDesign, CorelDRAW — альбомы, презентации, постраничная вёрстка подач.</p></div>
-          <div class="skill reveal delay-1"><h3>Конструкции</h3>
-            <p>Курсовые по ЖБК, металлу и дереву: схемы, расчётные задания, чертежи.</p></div>
-          <div class="skill reveal delay-2"><h3>Архитектурная графика</h3>
-            <p>Рисунок, живопись, клаузуры, макетирование — академическая база.</p></div>
+            <p>Моделирование АР и КР, сложные семейства, шаблоны проекта, спецификации, листы и рабочая документация.</p></div>
+          <div class="skill reveal delay-1"><h3>Семейства и узлы КР</h3>
+            <p>Приямки с многослойной гидроизоляцией, арматура по дуге, фасадные панели, 2D-узлы по альбомам типовых решений.</p></div>
+          <div class="skill reveal delay-2"><h3>Navisworks + IFC</h3>
+            <p>Поиск коллизий, отчёты и матрица коллизий, экспертиза модели IFC, работа с облаком точек.</p></div>
+          <div class="skill reveal"><h3>Renga · Archicad · AutoCAD</h3>
+            <p>Моделирование по чертежам и оформление документации в смежных САПР, включая Компас 3D.</p></div>
+          <div class="skill reveal delay-1"><h3>Визуализация</h3>
+            <p>Lumion, Render Air, SketchUp — экстерьеры, схемы, подача концепций.</p></div>
+          <div class="skill reveal delay-2"><h3>Графика и подачи</h3>
+            <p>Photoshop, InDesign, QGIS — альбомы, буклеты, планировки, градостроительный анализ.</p></div>
         </div>
       </div>
     </section>
@@ -202,7 +219,7 @@
     </div>
   </footer>
 
-  <script src="js/projects-data.js?v=3"></script>
-  <script src="js/main.js?v=3"></script>
+  <script src="js/projects-data.js?v=4"></script>
+  <script src="js/main.js?v=4"></script>
 </body>
 </html>
