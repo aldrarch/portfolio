@@ -65,7 +65,7 @@ p { margin: 0 0 1em; }
 
 /* ---------- Hero ---------- */
 .hero { padding: 84px 0 64px; position: relative; }
-.hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center; }
+.hero-grid { display: grid; grid-template-columns: 1fr; gap: 28px; align-items: center; }
 .hero-overline { color: var(--accent); font-weight: 600; letter-spacing: .12em; text-transform: uppercase; font-size: .8rem; margin-bottom: 14px; }
 .hero-lead { color: var(--muted); font-size: 1.06rem; max-width: 54ch; }
 .hero-actions { display: flex; gap: 14px; margin: 26px 0 30px; flex-wrap: wrap; }
@@ -221,6 +221,19 @@ p { margin: 0 0 1em; }
   .lb-prev, .lb-next { top: auto; bottom: 20px; transform: none; }
   .lb-prev { left: 20px; } .lb-next { right: 20px; }
 }
+
+/* ---------- Заглушка вместо обложки на главной ---------- */
+.card-media-ph {
+  aspect-ratio: 4 / 3; display: flex; flex-direction: column; gap: 6px;
+  align-items: flex-start; justify-content: flex-end; padding: 18px;
+  background:
+    linear-gradient(135deg, #d8dce2 0%, #c3c9d2 55%, #aeb6c2 100%);
+  color: #2b313a;
+}
+.card-media-ph span {
+  font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; opacity: .75;
+}
+.card-media-ph strong { font-family: var(--font-display); font-size: 1.15rem; line-height: 1.2; }
 
 /* ---------- Плашка «Опыт работы» ---------- */
 .xp-plate {

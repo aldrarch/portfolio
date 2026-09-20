@@ -33,7 +33,16 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
     });
   }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => {
+    /* элементы уже в первом экране показываем сразу — не ждём IO
+       (в некоторых webview IntersectionObserver срабатывает с задержкой) */
+    const r = el.getBoundingClientRect();
+    if (r.top < window.innerHeight && r.bottom > 0) {
+      el.classList.add('is-visible');
+    } else {
+      io.observe(el);
+    }
+  });
 
   /* ---------- Фильтры ---------- */
   const filterBtns = document.querySelectorAll('.filter');
