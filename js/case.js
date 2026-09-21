@@ -1,5 +1,5 @@
 /* Рендерер case study: project.html?p=<id> + CASES[id] из cases-data.js.
-   Раздел без контента пропускается; пустые поля → NEEDS_INPUT. */
+   Разделы рендерятся в порядке наличия; нумерация автоматическая. */
 (function () {
   'use strict';
   const pid = new URLSearchParams(location.search).get('p') || 'diplom';
@@ -14,7 +14,26 @@
   document.title = c.title + ' — Александра Ткачук';
 
   const esc = (s) => String(s).replace(/</g, '&lt;');
-  const need = (v) => !v || v === 'NEEDS_INPUT';
+
+  /* ---------- утилиты ---------- */
+  const blocksHtml = (blocks) => (blocks || []).map(b =>
+    `<div class="case-block"><h4>${esc(b[0])}</h4><p>${esc(b[1])}</p></div>`).join('');
+  const imgsHtml = (imgs) => (imgs || []).map(i =>
+    `<figure class="case-fig"><img src="${i[0]}" alt="${esc(i[1])}" loading="lazy"><figcaption>${esc(i[1])}</figcaption></figure>`).join('');
+  const gridsHtml = (imgs) => (imgs || []).map(i =>
+    `<figure class="case-fig case-fig-tile"><img src="${i[0]}" alt="${esc(i[1])}" loading="lazy"><figcaption>${esc(i[1])}</figcaption></figure>`).join('');
+
+  let num = 0;
+  const section = (title, alt, bodyHtml) => {
+    num += 1;
+    return `
+    <section class="case-section${alt ? ' case-alt' : ''}">
+      <div class="container case-grid">
+        <div><p class="case-num">${String(num).padStart(2, '0')}</p><h2>${esc(title)}</h2></div>
+        <div class="case-body">${bodyHtml}</div>
+      </div>
+    </section>`;
+  };
 
   /* ---------- HERO ---------- */
   const h = c.hero || {};
@@ -22,159 +41,104 @@
   <section class="case-hero">
     <div class="container">
       <a class="case-back" href="projects.html">← Все проекты</a>
-      <p class="case-overline">${esc(h.year || 'NEEDS_INPUT')} · ${esc(h.type || 'NEEDS_INPUT')}</p>
+      <p class="case-overline">${esc(h.year || '')} · ${esc(h.type || '')}</p>
       <h1 class="case-title">${esc(c.title)}</h1>
-      <p class="case-lead">${esc(h.lead || 'NEEDS_INPUT')}</p>
+      <p class="case-lead">${esc(h.lead || '')}</p>
       <div class="case-hero-meta">
-        <div><dt>Место</dt><dd>${esc(h.location || 'NEEDS_INPUT')}</dd></div>
-        <div><dt>Статус</dt><dd>${esc(h.status || 'NEEDS_INPUT')}</dd></div>
-        <div><dt>Роль</dt><dd>${esc(h.role || 'NEEDS_INPUT')}</dd></div>
-        <div><dt>Инструменты</dt><dd>${esc(h.tools || 'NEEDS_INPUT')}</dd></div>
+        <div><dt>Место</dt><dd>${esc(h.location || '')}</dd></div>
+        <div><dt>Статус</dt><dd>${esc(h.status || '')}</dd></div>
+        <div><dt>Роль</dt><dd>${esc(h.role || '')}</dd></div>
+        <div><dt>Инструменты</dt><dd>${esc(h.tools || '')}</dd></div>
       </div>
     </div>
     ${h.image ? `<figure class="case-hero-img"><img src="${h.image}" alt="${esc(c.title)}"></figure>` : ''}
   </section>`;
 
-  /* ---------- утилиты блоков ---------- */
-  const blocksHtml = (blocks) => (blocks || []).map(b =>
-    `<div class="case-block"><h4>${esc(b[0])}</h4><p>${esc(b[1])}</p></div>`).join('');
-  const imgsHtml = (imgs) => (imgs || []).map(i =>
-    `<figure class="case-fig"><img src="${i[0]}" alt="${esc(i[1])}"><figcaption>${esc(i[1])}</figcaption></figure>`).join('');
-
-  /* ---------- PROJECT / BRIEF ---------- */
+  /* ---------- 01 О проекте ---------- */
   if (c.brief) {
-    html += `
-    <section class="case-section">
-      <div class="container case-grid">
-        <div><p class="case-num">01</p><h2>О проекте</h2></div>
-        <div class="case-body">
-          <p>${esc(c.brief.text || 'NEEDS_INPUT')}</p>
-          ${c.brief.facts ? `<dl class="case-facts">${c.brief.facts.map(f =>
-            `<div><dt>${esc(f[0])}</dt><dd>${esc(f[1])}</dd></div>`).join('')}</dl>` : ''}
-        </div>
-      </div>
-    </section>`;
+    html += section('О проекте', false,
+      `<p>${esc(c.brief.text || '')}</p>
+       ${c.brief.facts ? `<dl class="case-facts">${c.brief.facts.map(f =>
+         `<div><dt>${esc(f[0])}</dt><dd>${esc(f[1])}</dd></div>`).join('')}</dl>` : ''}`);
   }
 
-  /* ---------- QUESTION ---------- */
+  /* ---------- 02 Вопрос ---------- */
   if (c.question) {
-    html += `
-    <section class="case-section case-alt">
-      <div class="container case-grid">
-        <div><p class="case-num">02</p><h2>Вопрос</h2></div>
-        <div class="case-body"><p class="case-question">${esc(c.question.text || 'NEEDS_INPUT')}</p></div>
-      </div>
-    </section>`;
+    html += section('Вопрос', true,
+      `<p class="case-question">${esc(c.question.text || '')}</p>`);
   }
 
-  /* ---------- RESEARCH ---------- */
+  /* ---------- 03 Контекст и исследование ---------- */
   if (c.research) {
-    html += `
-    <section class="case-section">
-      <div class="container case-grid">
-        <div><p class="case-num">03</p><h2>Контекст и исследование</h2></div>
-        <div class="case-body">${blocksHtml(c.research.blocks)}
-          ${c.research.finding ? `<p class="case-finding"><strong>Вывод.</strong> ${esc(c.research.finding)}</p>` : ''}
-        </div>
-      </div>
-    </section>`;
+    html += section('Контекст и исследование', false,
+      `${blocksHtml(c.research.blocks)}
+       ${c.research.finding ? `<p class="case-finding"><strong>Вывод.</strong> ${esc(c.research.finding)}</p>` : ''}
+       ${c.research.images ? `<div class="case-grid-2">${gridsHtml(c.research.images)}</div>` : ''}`);
   }
 
-  /* ---------- CONCEPT ---------- */
+  /* ---------- 04 Аналоги ---------- */
+  if (c.analogs) {
+    html += section('Аналоги', true, blocksHtml(c.analogs.blocks) +
+      (c.analogs.finding ? `<p class="case-finding"><strong>Принято в проект.</strong> ${esc(c.analogs.finding)}</p>` : ''));
+  }
+
+  /* ---------- 05 Концепция ---------- */
   if (c.concept) {
-    html += `
-    <section class="case-section case-alt">
-      <div class="container case-grid">
-        <div><p class="case-num">04</p><h2>Концепция</h2></div>
-        <div class="case-body">
-          ${c.concept.hypothesis ? `<p class="case-question">${esc(c.concept.hypothesis)}</p>` : ''}
-          ${c.concept.response ? `<p>${esc(c.concept.response)}</p>` : ''}
-          ${imgsHtml(c.concept.images)}
-        </div>
-      </div>
-    </section>`;
+    html += section('Концепция', false,
+      `${c.concept.hypothesis ? `<p class="case-question">${esc(c.concept.hypothesis)}</p>` : ''}
+       ${c.concept.response ? `<p>${esc(c.concept.response)}</p>` : ''}
+       ${c.concept.images ? `<div class="case-ai-grid">${gridsHtml(c.concept.images)}</div>` : ''}
+       ${c.concept.aiNote ? `<p class="case-muted case-ai-note">${esc(c.concept.aiNote)}</p>` : ''}`);
   }
 
-  /* ---------- DEVELOPMENT ---------- */
+  /* ---------- 06 Развитие ---------- */
   if (c.development) {
-    html += `
-    <section class="case-section">
-      <div class="container case-grid">
-        <div><p class="case-num">05</p><h2>Развитие</h2></div>
-        <div class="case-body">
-          ${blocksHtml(c.development.iterations)}
-          ${c.development.key ? `<p class="case-finding"><strong>Логика развития.</strong> ${esc(c.development.key)}</p>` : ''}
-        </div>
-      </div>
-    </section>`;
+    html += section('Развитие', true,
+      `${blocksHtml(c.development.iterations)}
+       ${c.development.key ? `<p class="case-finding"><strong>Логика развития.</strong> ${esc(c.development.key)}</p>` : ''}`);
   }
 
-  /* ---------- ARCHITECTURE ---------- */
+  /* ---------- 07 Архитектура ---------- */
   if (c.architecture) {
-    html += `
-    <section class="case-section case-alt">
-      <div class="container case-grid">
-        <div><p class="case-num">06</p><h2>Архитектура</h2></div>
-        <div class="case-body">${blocksHtml(c.architecture.blocks)}${imgsHtml(c.architecture.images)}</div>
-      </div>
-    </section>`;
+    html += section('Архитектура', false,
+      `${blocksHtml(c.architecture.blocks)}
+       ${c.architecture.images ? `<div class="case-fig-wide">${imgsHtml(c.architecture.images.slice(0, 2))}</div>
+       <div class="case-grid-2">${gridsHtml(c.architecture.images.slice(2))}</div>` : ''}`);
   }
 
-  /* ---------- SYSTEMS ---------- */
+  /* ---------- 08 Конструкции ---------- */
+  if (c.structures) {
+    html += section('Конструкции', true,
+      `${blocksHtml(c.structures.blocks)}
+       ${c.structures.images ? `<div class="case-grid-2">${gridsHtml(c.structures.images)}</div>` : ''}`);
+  }
+
+  /* ---------- 09 Инженерия ---------- */
   if (c.systems) {
-    html += `
-    <section class="case-section">
-      <div class="container case-grid">
-        <div><p class="case-num">07</p><h2>Системы</h2></div>
-        <div class="case-body">${blocksHtml(c.systems.blocks)}</div>
-      </div>
-    </section>`;
+    html += section('Инженерия', false, blocksHtml(c.systems.blocks));
   }
 
-  /* ---------- TECHNICAL ---------- */
-  if (c.technical) {
-    html += `
-    <section class="case-section case-alt">
-      <div class="container case-grid">
-        <div><p class="case-num">08</p><h2>Техническая реализация</h2></div>
-        <div class="case-body">${blocksHtml(c.technical.blocks)}
-          ${c.technical.album ? `<p><a class="btn btn-solid" href="${c.technical.album}">Открыть альбом чертежей →</a></p>` : ''}
-        </div>
-      </div>
-    </section>`;
+  /* ---------- 10 BIM и смета ---------- */
+  if (c.bim) {
+    html += section('BIM и смета', true, blocksHtml(c.bim.blocks));
   }
 
-  /* ---------- RESULT ---------- */
+  /* ---------- 11 Результат ---------- */
   if (c.result) {
-    html += `
-    <section class="case-section">
-      <div class="container case-grid">
-        <div><p class="case-num">09</p><h2>Результат</h2></div>
-        <div class="case-body">${c.result.text ? `<p>${esc(c.result.text)}</p>` : ''}${imgsHtml(c.result.images)}</div>
-      </div>
-    </section>`;
+    html += section('Результат', false,
+      `${c.result.text ? `<p>${esc(c.result.text)}</p>` : ''}
+       ${c.result.images ? `<div class="case-fig-wide">${imgsHtml(c.result.images)}</div>` : ''}`);
   }
 
-  /* ---------- REFLECTION ---------- */
+  /* ---------- 12 Рефлексия ---------- */
   if (c.reflection) {
-    html += `
-    <section class="case-section case-alt">
-      <div class="container case-grid">
-        <div><p class="case-num">10</p><h2>Рефлексия</h2></div>
-        <div class="case-body">${blocksHtml(c.reflection.blocks)}</div>
-      </div>
-    </section>`;
+    html += section('Рефлексия', true, blocksHtml(c.reflection.blocks));
   }
 
-  /* ---------- SOURCES ---------- */
+  /* ---------- 13 Материалы ---------- */
   if (c.sourceMaterials) {
-    html += `
-    <section class="case-section">
-      <div class="container case-grid">
-        <div><p class="case-num">11</p><h2>Материалы</h2></div>
-        <div class="case-body"><ul class="case-src">${c.sourceMaterials.map(s => `<li>${esc(s)}</li>`).join('')}</ul></div>
-      </div>
-    </section>`;
+    html += section('Материалы', false,
+      `<ul class="case-src">${c.sourceMaterials.map(s => `<li>${esc(s)}</li>`).join('')}</ul>`);
   }
 
   root.innerHTML = html;

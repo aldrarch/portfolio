@@ -83,3 +83,43 @@
   .case-hero-meta { grid-template-columns: 1fr 1fr; }
   .case-facts div { grid-template-columns: 1fr; gap: 2px; }
 }
+
+/* ---------- сетки изображений case study ---------- */
+.case-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin-top: 28px;
+}
+.case-grid-2 .case-fig-tile { margin: 0; }
+.case-grid-2 img {
+  width: 100%;
+  display: block;
+  border: 1px solid var(--line, #e3e0d8);
+  background: #fff;
+}
+.case-fig-wide { margin-top: 30px; }
+.case-fig-wide .case-fig { margin: 0; }
+
+/* галерея AI-эскизов: мозаика с чередующейся высотой */
+.case-ai-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 30px;
+}
+.case-ai-grid .case-fig-tile { margin: 0; }
+.case-ai-grid img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  border: 1px solid var(--line, #e3e0d8);
+  background: #fff;
+}
+.case-ai-note { margin-top: 14px; font-size: .88rem; }
+
+@media (max-width: 860px) {
+  .case-grid-2 { grid-template-columns: 1fr; gap: 16px; }
+  .case-ai-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+}
