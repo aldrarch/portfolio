@@ -652,3 +652,31 @@ p { margin: 0 0 1em; }
 
 /* подпись листа: номер сразу под изображением */
 .sheet figcaption { padding: 6px 2px 0; }
+
+/* ================= Страница-сетка портфолио (portfolio.html) ================= */
+
+.pf-page-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+.pf-page-grid .pf-cell {
+  margin: 0; cursor: zoom-in;
+  border: 1px solid var(--line); border-radius: 10px;
+  overflow: hidden; background: var(--surface);
+  transition: box-shadow .2s, transform .2s;
+  display: flex; flex-direction: column;
+}
+.pf-page-grid .pf-cell:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+.pf-page-grid .pf-cell canvas { width: 100%; height: auto; display: block; }
+.pf-page-grid .pf-cell figcaption {
+  padding: 8px 12px;
+  border-top: 1px solid var(--line);
+  font-size: .82rem; color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.pf-page-grid .pf-cell.is-broken::after {
+  content: 'лист недоступен'; display: block; padding: 30px;
+  color: var(--muted); font-size: .85rem; text-align: center;
+}

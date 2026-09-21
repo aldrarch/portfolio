@@ -78,7 +78,10 @@ document.addEventListener('DOMContentLoaded', () => {
       elTitle.textContent = project.title;
       elTag.textContent = project.tag;
       const isCase = typeof CASES !== 'undefined' && CASES[project.id];
-      if (isCase) {
+      if (project.id === 'portfolio-2026') {
+        elAlbum.href = 'portfolio.html';
+        elAlbum.textContent = 'Сетка листов портфолио →';
+      } else if (isCase) {
         elAlbum.href = `project.html?p=${project.id}`;
         elAlbum.textContent = 'Открыть case study →';
       } else {

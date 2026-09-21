@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Портфолио · 2026 — сетка листов | Александра Ткачук</title>
+  <meta name="description" content="Сводное архитектурное портфолио сеткой: все 10 листов, увеличение и листание вправо-влево.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231647e3'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-family='Georgia'%3E%D0%90%D0%A2%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=9">
+</head>
+<body>
+
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">АТ<span class="logo-dot">.</span></a>
+      <nav class="nav">
+        <a href="index.html#about">Обо мне</a>
+        <a href="projects.html">Проекты</a>
+        <a href="experience.html">Опыт</a>
+        <a href="index.html#skills">Навыки</a>
+        <a href="index.html#revit">BIM / Revit</a>
+        <a href="index.html#contacts" class="nav-cta">Контакты</a>
+      </nav>
+      <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="section page-head">
+      <div class="container reveal">
+        <p class="section-overline">Сводный альбом · 10 листов</p>
+        <h1>Портфолио</h1>
+      </div>
+    </section>
+
+    <section class="section section-flush">
+      <div class="container">
+        <div class="pf-page-grid" id="pf-grid"><!-- листы рендерятся из js/portfolio-grid.js --></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>© 2026 Александра Ткачук</span>
+      <span>Архитектура · BIM · Revit</span>
+      <a href="#top">Наверх ↑</a>
+    </div>
+  </footer>
+
+  <!-- Увеличение одного листа -->
+  <div class="pf-viewer" id="pf-viewer" hidden>
+    <button class="pf-v-close" id="pf-v-close" aria-label="Закрыть">×</button>
+    <button class="pf-v-arrow pf-v-prev" id="pf-v-prev" aria-label="Предыдущий лист">‹</button>
+    <figure class="pf-v-stage"><canvas id="pf-v-canvas"></canvas></figure>
+    <button class="pf-v-arrow pf-v-next" id="pf-v-next" aria-label="Следующий лист">›</button>
+    <p class="pf-v-counter" id="pf-v-counter"></p>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="js/portfolio-grid.js?v=3"></script>
+</body>
+</html>

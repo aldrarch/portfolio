@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     num++;
     const isCase = typeof CASES !== 'undefined' && CASES[p.id];
+    const isPortfolio = p.id === 'portfolio-2026';
     const mediaInner = p.cover
       ? `<img src="${p.cover}" alt="${p.title}" loading="lazy">`
       : `<div class="sheet-ph"><span>Лист</span><strong>${p.title}</strong><em>${p.tag}</em></div>`;
@@ -52,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fig.className = 'sheet reveal';
     fig.dataset.i = order[oi];
     fig.dataset.cat = (p.cat || []).join(' ');
+    fig.dataset.href = isPortfolio ? 'portfolio.html' : (isCase ? `project.html?p=${p.id}` : '');
     fig.tabIndex = 0;
     fig.setAttribute('role', 'button');
     fig.setAttribute('aria-label', p.title);
@@ -59,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="sheet-media">${mediaInner}</div>
       <figcaption>
         <span class="sheet-num">${pad(num)}</span>
-        <span class="sheet-title">${p.title}${isCase ? ' <em class="case-mark">case study</em>' : ''}</span>
+        <span class="sheet-title">${p.title}${isPortfolio ? ' <em class="case-mark">сетка листов</em>' : isCase ? ' <em class="case-mark">case study</em>' : ''}</span>
         <span class="sheet-tag">${p.tag}</span>
       </figcaption>`;
     wrap.appendChild(fig);
@@ -77,10 +79,11 @@ document.addEventListener('DOMContentLoaded', () => {
     else { io.observe(el); }
   });
 
-  /* ---------- Фильтры ---------- */
+  /* ---------- Фильтры («Портфолио» ведёт на уникальную страницу сетки) ---------- */
   const filterBtns = document.querySelectorAll('#filters .filter');
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
+      if (btn.dataset.filter === 'portfolio') { location.href = 'portfolio.html'; return; }
       filterBtns.forEach(b => b.classList.remove('is-active'));
       btn.classList.add('is-active');
       const f = btn.dataset.filter;
@@ -127,7 +130,10 @@ document.addEventListener('DOMContentLoaded', () => {
     elTitle.textContent = project.title;
     elTag.textContent = project.tag;
     const isCase = typeof CASES !== 'undefined' && CASES[project.id];
-    if (isCase) {
+    if (project.id === 'portfolio-2026') {
+      elAlbum.href = 'portfolio.html';
+      elAlbum.textContent = 'Сетка листов портфолио →';
+    } else if (isCase) {
       elAlbum.href = `project.html?p=${project.id}`;
       elAlbum.textContent = 'Открыть case study →';
     } else if (project.type === 'pdf') {
@@ -178,11 +184,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   wrap.addEventListener('click', e => {
     const sh = e.target.closest('.sheet');
-    if (sh) openAt(+sh.dataset.i);
+    if (!sh) return;
+    if (sh.dataset.href) { location.href = sh.dataset.href; return; } // уникальные страницы — прямой переход
+    openAt(+sh.dataset.i);
   });
   wrap.addEventListener('keydown', e => {
     const sh = e.target.closest('.sheet');
-    if (sh && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openAt(+sh.dataset.i); }
+    if (sh && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault();
+      if (sh.dataset.href) { location.href = sh.dataset.href; return; }
+      openAt(+sh.dataset.i);
+    }
   });
 
   document.getElementById('lbClose').addEventListener('click', close);
