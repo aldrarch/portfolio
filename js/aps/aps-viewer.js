@@ -32,8 +32,15 @@
       } catch (e) { void e; }
       m = m || { id: id, title: id, engine: 'placeholder' };
       this.model = m;
-      if (m.engine === 'autodesk') await this._loadAutodesk(m);
-      else await this.engine.setModel(null);
+      const mode = this.opts.mode;
+      if (mode === 'family') {
+        // параметрическое семейство (демо-режим three.js)
+        await this.engine.setModelFamily ? this.engine.setModelFamily() : this.engine.setModel(null);
+      } else if (m.engine === 'autodesk') {
+        await this._loadAutodesk(m);
+      } else {
+        await this.engine.setModel(null);
+      }
       this._fillViews(); this._fillCats();
       return this;
     }
@@ -187,8 +194,14 @@
     }
 
     _toggleCat(key, on) {
-      const arr = (this.engine._meshes || []).filter(m => m.userData.cat === key).map(m => m.userData.dbId);
-      if (on) this.engine.show(arr); else this.engine.hide(arr);
+      const meshes = this.engine._meshes;
+      if (meshes) {
+        const arr = meshes.filter(m => m.userData.cat === key).map(m => m.userData.dbId);
+        if (on) this.engine.show(arr); else this.engine.hide(arr);
+      } else if (this.engine.catDbIds) {
+        // реальная модель: движок сам знает dbId категории
+        this.engine.catDbIds(key, !on);
+      }
     }
 
     _onEngineSelection() {
@@ -262,5 +275,12 @@
     mount: (host, opts) =>
       new ApsViewer(host, opts).init()
         .then(v => v.loadFromRegistry((opts && opts.projectId) || 'demo')),
+    /* быстрый mount семейства без реестра */
+    mountFamily: (host, opts) => {
+      const inst = new ApsViewer(host, Object.assign({ mode: 'family' }, opts));
+      return inst.init()
+        .then(() => inst.engine.setModelFamily())
+        .then(() => { inst._fillViews(); inst._fillCats(); return inst; });
+    },
   };
 })();

@@ -13,6 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=7">
+  <link rel="stylesheet" href="css/aps-viewer.css?v=2">
 </head>
 <body>
 
@@ -194,19 +195,31 @@
           </ul>
           <a class="btn btn-solid" href="assets-revit/AR_Отверстие прямоугольное (в плите)_Дев.rfa" download>Скачать семейство (.rfa)</a>
         </div>
-        <div class="revit-files reveal delay-1">
-          <div class="revit-file"><span class="rfa-badge">RFA</span>
-            <div><strong>Отверстие прямоугольное (в плите)</strong>
-            <em>AR_ · параметрическое семейство</em></div></div>
-          <div class="revit-file"><span class="rfa-badge">RFA</span>
-            <div><strong>Отверстие прямоугольное.0001</strong>
-            <em>версия с типоразмерами</em></div></div>
-          <div class="revit-file"><span class="rfa-badge">RFA</span>
-            <div><strong>Отверстие</strong>
-            <em>базовое семейство</em></div></div>
-          <div class="revit-file"><span class="rfa-badge">RFA</span>
-            <div><strong>УГО · Отверстие · Цветовое</strong>
-            <em>условные обозначения и цветовые схемы</em></div></div>
+        <div class="revit-viewer reveal delay-1">
+          <p class="revit-viewer-lead">
+            Живое демо: параметрическое семейство — выберите окно и меняйте
+            Width / Height / Rotation / Spacing, геометрия пересчитается мгновенно.
+          </p>
+          <div id="aps-family-host"></div>
+          <p class="aps-note">
+            Демо-режим на three.js. Реальные RVT-модели подключаются через
+            Autodesk Platform Services (RVT → Model Derivative → Viewer) —
+            см. README «Как подключить модель». Семейства .rfa доступны ниже.
+          </p>
+          <div class="revit-files">
+            <div class="revit-file"><span class="rfa-badge">RFA</span>
+              <div><strong>Отверстие прямоугольное (в плите)</strong>
+              <em>AR_ · параметрическое семейство</em></div></div>
+            <div class="revit-file"><span class="rfa-badge">RFA</span>
+              <div><strong>Отверстие прямоугольное.0001</strong>
+              <em>версия с типоразмерами</em></div></div>
+            <div class="revit-file"><span class="rfa-badge">RFA</span>
+              <div><strong>Отверстие</strong>
+              <em>базовое семейство</em></div></div>
+            <div class="revit-file"><span class="rfa-badge">RFA</span>
+              <div><strong>УГО · Отверстие · Цветовое</strong>
+              <em>условные обозначения и цветовые схемы</em></div></div>
+          </div>
         </div>
       </div>
     </section>
@@ -244,7 +257,17 @@
     </div>
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="js/aps/aps-viewer.js?v=2"></script>
+  <script src="js/aps/three-placeholder.js?v=2"></script>
+  <script src="js/aps/autodesk-engine.js?v=2"></script>
   <script src="js/projects-data.js?v=7"></script>
   <script src="js/main.js?v=7"></script>
+  <script>
+    // параметрическое семейство в разделе «Семейства Revit»
+    if (window.ApsViewer && document.getElementById('aps-family-host')) {
+      window.ApsViewer.mountFamily(document.getElementById('aps-family-host')).then(v => { window.__apsFamily = v; });
+    }
+  </script>
 </body>
 </html>

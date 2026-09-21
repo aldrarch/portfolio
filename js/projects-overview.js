@@ -12,21 +12,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const pad = n => String(n).padStart(2, '0');
 
-  /* ---------- Сетка листов ---------- */
-  sheetsWrap.innerHTML = PROJECTS.map((p, i) => {
+  /* ---------- Сортировка по курсам (по убыванию) ---------- */
+  const courseOf = p => {
+    const m = (p.tag || '').match(/^(\d)\s*курс/);
+    return m ? +m[1] : (p.cat || []).includes('diploma') ? 6 : 0;
+  };
+  const courseName = c => ({
+    6: 'Диплом', 5: '5 курс', 4: '4 курс', 3: '3 курс',
+    2: '2 курс', 0: 'Прочее'
+  })[c] || 'Прочее';
+  const order = [...PROJECTS.keys()].sort((a, b) =>
+    courseOf(PROJECTS[b]) - courseOf(PROJECTS[a]) || a - b);
+  const ordered = order.map(i => PROJECTS[i]);
+
+  /* ---------- Сетка листов с разделителями курсов ---------- */
+  const parent = sheetsWrap.parentElement;
+  sheetsWrap.remove();
+  const wrap = document.createElement('div');
+  wrap.className = 'sheets';
+  parent.appendChild(wrap);
+
+  let lastCourse = null;
+  let num = 0;
+  ordered.forEach((p, oi) => {
+    const co = courseOf(p);
+    if (co !== lastCourse) {
+      const div = document.createElement('div');
+      div.className = 'course-divider';
+      div.innerHTML = `<span>${courseName(co)}</span>`;
+      wrap.appendChild(div);
+      lastCourse = co;
+    }
+    num++;
+    const isCase = typeof CASES !== 'undefined' && CASES[p.id];
     const mediaInner = p.cover
       ? `<img src="${p.cover}" alt="${p.title}" loading="lazy">`
       : `<div class="sheet-ph"><span>Лист</span><strong>${p.title}</strong><em>${p.tag}</em></div>`;
-    return `
-    <figure class="sheet reveal" data-i="${i}" data-cat="${(p.cat || []).join(' ')}" tabindex="0" role="button" aria-label="${p.title}">
+    const fig = document.createElement('figure');
+    fig.className = 'sheet reveal';
+    fig.dataset.i = order[oi];
+    fig.dataset.cat = (p.cat || []).join(' ');
+    fig.tabIndex = 0;
+    fig.setAttribute('role', 'button');
+    fig.setAttribute('aria-label', p.title);
+    fig.innerHTML = `
       <div class="sheet-media">${mediaInner}</div>
       <figcaption>
-        <span class="sheet-num">${pad(i + 1)}</span>
-        <span class="sheet-title">${p.title}</span>
+        <span class="sheet-num">${pad(num)}</span>
+        <span class="sheet-title">${p.title}${isCase ? ' <em class="case-mark">case study</em>' : ''}</span>
         <span class="sheet-tag">${p.tag}</span>
-      </figcaption>
-    </figure>`;
-  }).join('');
+      </figcaption>`;
+    wrap.appendChild(fig);
+  });
 
   /* ---------- Reveal ---------- */
   const io = new IntersectionObserver((entries) => {
@@ -47,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
       filterBtns.forEach(b => b.classList.remove('is-active'));
       btn.classList.add('is-active');
       const f = btn.dataset.filter;
-      document.querySelectorAll('#sheets .sheet').forEach(sh => {
+      document.querySelectorAll('.sheets .sheet').forEach(sh => {
         const cats = (sh.dataset.cat || '').split(/\s+/);
         sh.classList.toggle('is-hidden', !(f === 'all' || cats.includes(f)));
       });
@@ -66,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function visibleIndices() {
     const idx = [];
-    document.querySelectorAll('#sheets .sheet:not(.is-hidden)').forEach(sh => idx.push(+sh.dataset.i));
+    document.querySelectorAll('.sheets .sheet:not(.is-hidden)').forEach(sh => idx.push(+sh.dataset.i));
     return idx;
   }
 
@@ -89,8 +126,17 @@ document.addEventListener('DOMContentLoaded', () => {
   async function show(project) {
     elTitle.textContent = project.title;
     elTag.textContent = project.tag;
-    elAlbum.href = project.type === 'pdf' ? `album.html?p=${project.id}` : project.src;
-    elAlbum.textContent = project.type === 'pdf' ? 'Открыть весь альбом →' : 'Открыть лист →';
+    const isCase = typeof CASES !== 'undefined' && CASES[project.id];
+    if (isCase) {
+      elAlbum.href = `project.html?p=${project.id}`;
+      elAlbum.textContent = 'Открыть case study →';
+    } else if (project.type === 'pdf') {
+      elAlbum.href = `album.html?p=${project.id}`;
+      elAlbum.textContent = 'Открыть весь альбом →';
+    } else {
+      elAlbum.href = project.src;
+      elAlbum.textContent = 'Открыть лист →';
+    }
     holder.innerHTML = '<div class="lb-loading">Загрузка листа…</div>';
     try {
       const url = await firstPageDataURL(project);
@@ -130,11 +176,11 @@ document.addEventListener('DOMContentLoaded', () => {
     currentProject = null;
   }
 
-  sheetsWrap.addEventListener('click', e => {
+  wrap.addEventListener('click', e => {
     const sh = e.target.closest('.sheet');
     if (sh) openAt(+sh.dataset.i);
   });
-  sheetsWrap.addEventListener('keydown', e => {
+  wrap.addEventListener('keydown', e => {
     const sh = e.target.closest('.sheet');
     if (sh && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openAt(+sh.dataset.i); }
   });

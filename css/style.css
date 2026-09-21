@@ -458,3 +458,132 @@ p { margin: 0 0 1em; }
 
 .about-next-row span:last-child { transition: transform .25s; }
 .about-next-row:hover span:last-child { transform: translateX(5px); }
+
+/* ================= BIM-вьюер в разделе Revit ================= */
+
+.revit-viewer-lead { color: #39414b; margin: 0 0 14px; font-size: .95rem; }
+
+#aps-family-host {
+  height: clamp(380px, 55vh, 560px);
+  border-radius: 14px;
+  border: 1px solid var(--line);
+}
+
+#aps-family-host.aps-mount { background: #101216; }
+
+/* ================= Плашка «Портфолио» + сетка листов ================= */
+
+.portfolio-plate { padding-bottom: 40px; }
+
+.portfolio-plate-head {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 24px; margin-bottom: 26px; flex-wrap: wrap;
+}
+.portfolio-plate-head h2 {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(1.8rem, 3.6vw, 2.6rem); margin: 0 0 6px;
+}
+.portfolio-plate-head .page-lead { max-width: 34em; margin: 0; }
+
+.portfolio-plate-thumbs {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+}
+.plate-thumb {
+  margin: 0; border: 1px solid var(--line); border-radius: 10px;
+  overflow: hidden; background: var(--surface); aspect-ratio: 1.41;
+}
+.plate-thumb canvas { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* модальная сетка листов портфолио */
+.pf-grid-overlay {
+  position: fixed; inset: 0; z-index: 80;
+  background: var(--bg); overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.pf-grid-overlay[hidden] { display: none; }
+
+.pf-grid-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 28px; border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+.pf-grid-header strong { font-family: var(--font-display); font-weight: 400; font-size: 1.15rem; }
+.pf-grid-header span { margin-left: 14px; color: var(--muted); font-size: .88rem; }
+
+.pf-grid-scroll {
+  overflow-y: auto; padding: 26px;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px;
+  align-content: start;
+}
+.pf-cell {
+  margin: 0; cursor: zoom-in; border: 1px solid var(--line);
+  border-radius: 10px; overflow: hidden; background: var(--surface);
+  transition: box-shadow .2s, transform .2s;
+}
+.pf-cell:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+.pf-cell canvas { width: 100%; display: block; }
+.pf-cell figcaption {
+  padding: 8px 12px; font-size: .82rem; color: var(--muted);
+  border-top: 1px solid var(--line);
+}
+.pf-cell.is-broken::after {
+  content: 'лист недоступен'; display: block; padding: 30px;
+  color: var(--muted); font-size: .85rem; text-align: center;
+}
+.pf-loading { color: var(--muted); padding: 40px; grid-column: 1/-1; }
+
+/* увеличение одного листа */
+.pf-viewer {
+  position: fixed; inset: 0; z-index: 90;
+  background: rgba(10, 10, 12, .96);
+  display: flex; align-items: center; justify-content: center;
+}
+.pf-viewer[hidden] { display: none; }
+.pf-v-stage { margin: 0; max-width: min(92vw, 1200px); max-height: 86vh; display: flex; }
+.pf-v-stage canvas {
+  max-width: 100%; max-height: 86vh; object-fit: contain;
+  background: #fff; border-radius: 6px; box-shadow: 0 20px 60px rgba(0,0,0,.5);
+}
+.pf-v-close, .pf-v-arrow {
+  position: absolute; z-index: 2;
+  appearance: none; border: 1px solid rgba(255,255,255,.25);
+  background: rgba(255,255,255,.08); color: #fff;
+  border-radius: 50%; cursor: pointer;
+  width: 44px; height: 44px; font-size: 1.3rem; line-height: 1;
+}
+.pf-v-close { top: 18px; right: 18px; }
+.pf-v-arrow { top: 50%; transform: translateY(-50%); }
+.pf-v-prev { left: 18px; }
+.pf-v-next { right: 18px; }
+.pf-v-close:hover, .pf-v-arrow:hover { background: rgba(255,255,255,.2); }
+.pf-v-counter {
+  position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+  color: #bbb; font-size: .85rem; margin: 0;
+}
+
+@media (max-width: 720px) {
+  .portfolio-plate-thumbs { grid-template-columns: repeat(2, 1fr); }
+  .pf-grid-scroll { grid-template-columns: repeat(2, 1fr); padding: 14px; gap: 10px; }
+  .pf-v-prev { left: 8px; } .pf-v-next { right: 8px; }
+}
+
+/* ---------- разделители курсов в списке проектов ---------- */
+
+.course-divider {
+  grid-column: 1 / -1;
+  display: flex; align-items: center; gap: 16px;
+  margin: 26px 0 6px;
+}
+.course-divider:first-child { margin-top: 0; }
+.course-divider span {
+  font-size: .8rem; font-weight: 600; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--muted); white-space: nowrap;
+}
+.course-divider::after { content: ''; height: 1px; background: var(--line); flex: 1; opacity: .7; }
+
+.case-mark {
+  font-style: normal; font-size: .72rem; font-weight: 600;
+  color: var(--accent); border: 1px solid currentColor;
+  border-radius: 999px; padding: 1px 8px; margin-left: 8px;
+  vertical-align: 2px; letter-spacing: .04em;
+}

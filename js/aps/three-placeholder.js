@@ -315,3 +315,114 @@
 })();
 
 })();
+
+/* ---------- Режим «параметрическое семейство» (для раздела Revit) ---------- */
+(function () {
+  'use strict';
+  const T = window.THREE;
+  const P = window.ThreePlaceholder.prototype;
+
+  P.setModelFamily = function () {
+    this.ui.showLoader('Сборка параметрического семейства…');
+    if (this.group) this.scene.remove(this.group);
+    const g = this.group = new T.Group();
+    const M = (c, o) => new T.MeshLambertMaterial(
+      o ? { color: c, transparent: true, opacity: o } : { color: c });
+    const matWall = M(0xd6d9dd), matFrame = M(0x4a4f57), matGlass = M(0x7fa8d8, .5);
+    const self = this;
+    let id = 1;
+
+    // стена-основа
+    const wall = new T.Mesh(new T.BoxGeometry(14, 3.6, .3), matWall);
+    wall.position.set(0, 1.8, 0);
+    wall.userData = { dbId: id++, cat: 'wall', catLabel: 'Стена', name: 'Стена-основание', params: null, base: {} };
+    g.add(wall);
+
+    // экземпляры окна семейства
+    this._instances = [];
+    const mkWin = (i, w, h, rot) => {
+      const grp = new T.Group();
+      const frame = new T.Mesh(new T.BoxGeometry(w, h, .16), matFrame);
+      const glass = new T.Mesh(new T.BoxGeometry(Math.max(.1, w - .12), Math.max(.1, h - .12), .06), matGlass);
+      glass.position.z = .06;
+      const dbId = id++;
+      [frame, glass].forEach(m => {
+        m.userData = {
+          dbId, cat: 'win', catLabel: 'Окна (семейство)',
+          name: 'Окно ' + (i + 1),
+          params: { Width: Math.round(w * 1000), Height: Math.round(h * 1000), Rotation: rot },
+          base: { idx: i },
+        };
+        grp.add(m);
+      });
+      return grp;
+    };
+
+    for (let i = 0; i < 5; i++) {
+      const win = mkWin(i, 1.2, 1.8, 0);
+      win.position.set(-5.6 + i * 2.8, 1.8, 0);
+      g.add(win);
+      this._instances.push(win);
+    }
+
+    this.scene.add(g);
+    this._bbox.setFromObject(g);
+    this.cats = [
+      { key: 'wall', label: 'Стена', count: 1 },
+      { key: 'win', label: 'Окна (семейство)', count: 5 },
+    ];
+    this.presets = [
+      { name: 'Фасад', pos: [0, 2.2, 21], tgt: [0, 1.8, 0] },
+      { name: 'Изометрия', pos: [10, 6.5, 14], tgt: [0, 1.8, 0] },
+    ];
+    this._meshes = [];
+    g.traverse(o => { if (o.isMesh) this._meshes.push(o); });
+    this.ui.hideLoader();
+    this._fly(this.presets[0].pos, this.presets[0].tgt);
+    return { dbIds: this._meshes.length };
+  };
+
+  /* применение параметров к семейству */
+  const baseApply = P.applyParams;
+  P.applyParams = function (dbId, params) {
+    const m = this._meshes && this._meshes.find(x => x.userData.dbId === dbId);
+    if (!m) return baseApply ? baseApply.call(this, dbId, params) : false;
+    const u = m.userData;
+    if (!u.params) return false;
+    Object.assign(u.params, params);
+    const k = .001;
+    // ширина/высота/поворот — меняем геометрию обоих мешей экземпляра
+    if (params.Width != null || params.Height != null || params.Rotation != null) {
+      const grp = m.parent;
+      const w = (u.params.Width) * k, h = (u.params.Height) * k;
+      const frame = grp.children[0], glass = grp.children[1];
+      frame.geometry.dispose();
+      frame.geometry = new T.BoxGeometry(Math.max(.1, w), Math.max(.1, h), .16);
+      glass.geometry.dispose();
+      glass.geometry = new T.BoxGeometry(Math.max(.05, w - .12), Math.max(.05, h - .12), .06);
+      grp.rotation.y = (u.params.Rotation * Math.PI) / 180;
+      // синхронизировать параметры на втором меше экземпляра
+      grp.children.forEach(c => { if (c !== m) Object.assign(c.userData.params, params); });
+    }
+    // шаг расстановки — двигаем все экземпляры
+    if (params.Spacing != null) {
+      const dx = Math.max(.4, params.Spacing * k);
+      this._instances.forEach((win, i) => { win.position.x = -((this._instances.length - 1) / 2) * dx + i * dx; });
+      this._instances.forEach(win => win.children.forEach(c => { c.userData.params.Spacing = params.Spacing; }));
+    }
+    return true;
+  };
+
+  //family-режим получает Spacing-слайдер на первом выбранном экземпляре
+  const baseProps = P.getProperties;
+  P.getProperties = function (dbId) {
+    const m = this._meshes && this._meshes.find(x => x.userData.dbId === dbId);
+    if (!m) return baseProps ? baseProps.call(this, dbId) : null;
+    const u = m.userData;
+    const rows = [['Категория', u.catLabel], ['Имя', u.name]];
+    if (u.params) for (const kk in u.params) {
+      rows.push([kk, u.params[kk] + (kk === 'Rotation' ? '°' : ' мм')]);
+    }
+    return rows;
+  };
+})();
