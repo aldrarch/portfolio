@@ -321,3 +321,95 @@ p { margin: 0 0 1em; }
   .xp-plate { padding: 22px; }
   .lightbox { padding: 16px; }
 }
+
+/* ================= VALUES SLIDER ================= */
+
+.values-section { padding-top: 0; }
+
+.values-stage { display: flex; justify-content: center; }
+
+.values-frame {
+  position: relative;
+  width: min(860px, 100%);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 56px 64px 64px;
+  overflow: hidden;
+}
+
+.values-pane { display: none; }
+.values-pane.is-active { display: block; animation: values-fade .5s ease; }
+
+@keyframes values-fade {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.values-list { list-style: none; margin: 0; padding: 0; }
+
+.values-list li {
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+  color: #39414b;
+  font-size: .97rem;
+  line-height: 1.65;
+}
+
+.values-list li:first-child { border-top: 0; padding-top: 4px; }
+.values-list strong { display: block; margin-bottom: 4px; font-weight: 600; color: var(--ink); }
+
+.values-goal {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--ink);
+  max-width: 34em;
+}
+.values-goal strong { font-weight: 600; }
+
+.values-goal-sub {
+  margin-top: 18px;
+  color: #39414b;
+  line-height: 1.7;
+  max-width: 34em;
+}
+
+/* стрелка «дальше» */
+.values-arrow {
+  position: absolute;
+  right: 20px; bottom: 20px;
+  width: 48px; height: 48px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  border-radius: 50%;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .25s, color .25s, transform .25s;
+}
+
+.values-arrow:hover {
+  background: var(--ink);
+  color: var(--paper);
+  transform: translateX(3px);
+}
+
+/* точки-переключатели */
+.values-dots { position: absolute; left: 64px; bottom: 32px; display: flex; gap: 8px; }
+
+.values-dot {
+  width: 9px; height: 9px;
+  padding: 0;
+  border: 1px solid var(--ink);
+  background: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background .25s;
+}
+
+.values-dot.is-active { background: var(--ink); }
+
+@media (max-width: 720px) {
+  .values-frame { padding: 40px 24px 72px; }
+  .values-dots { left: 24px; bottom: 28px; }
+}

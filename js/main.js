@@ -66,3 +66,33 @@ document.addEventListener('DOMContentLoaded', () => {
     nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('is-open')));
   }
 });
+
+/* ================= VALUES SLIDER ================= */
+
+(() => {
+  const frame = document.querySelector('.values-frame');
+  if (!frame) return;
+
+  const panes = [...frame.querySelectorAll('.values-pane')];
+  const dots  = [...frame.querySelectorAll('.values-dot')];
+  const arrow = frame.querySelector('#values-next');
+  let cur = 0;
+
+  function show(n) {
+    cur = (n + panes.length) % panes.length;
+    panes.forEach((p, i) => p.classList.toggle('is-active', i === cur));
+    dots.forEach((d, i) => d.classList.toggle('is-active', i === cur));
+    arrow.setAttribute('aria-label',
+      cur === 0 ? 'Следующий слайд: цель' : 'Вернуться к ценностям');
+  }
+
+  arrow.addEventListener('click', () => show(cur + 1));
+  dots.forEach((d, i) => d.addEventListener('click', () => show(i)));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    const r = frame.getBoundingClientRect();
+    if (r.top > innerHeight || r.bottom < 0) return;
+    show(cur + (e.key === 'ArrowRight' ? 1 : -1));
+  });
+})();

@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=5">
+  <link rel="stylesheet" href="css/style.css?v=6">
 </head>
 <body>
 
@@ -61,17 +61,19 @@
         </div>
         <div class="about-text reveal delay-1">
           <p>
-            Я — Александра Ткачук, выпускница НГУАДИ (Новосибирск, 2021–2026,
-            специализация «архитектурное проектирование»). За годы учёбы — от клаузур
-            и макетов до дипломной подачи; с 2023 года — практический опыт в BIM:
-            от моделирования по чертежам до разработки семейств и поддержки команд.
+            Мне интересна архитектура, в которой идея и инженерная дисциплина не спорят,
+            а работают вместе: от концепции до аккуратной рабочей документации. Практикую
+            BIM с 2023 года — от моделирования по чертежам до разработки параметрических
+            семейств Revit и поддержки команд.
           </p>
           <p>
-            В BIM мне ближе всего Revit: создаю параметрические семейства (например,
-            семейства прямоугольных отверстий в плитах — с УГО и цветовыми схемами),
-            работаю со связями Rhino.Inside.Revit, готовлю альбомы чертежей и подачи.
-            Умею довести модель до аккуратной документации.
+            Больше всего люблю задачи на стыке: когда сложная концептуальная идея
+            превращается в реально работающий объект — конструкцию, технологию, модель,
+            документацию. Особенно — там, где к архитектуре подключаются программирование,
+            научные методы и эксперимент.
           </p>
+          <a class="about-next" href="#values" aria-label="Дальше: ценности и цель">→</a>
+        </div>
           <ul class="about-facts">
             <li><strong>Образование</strong>НГУАДИ, архитектура, 2021–2026</li>
             <li><strong>Сейчас</strong>BIM-мастер КР · «ПИК Технологии», Москва</li>
@@ -88,6 +90,41 @@
             <p class="xp-plate-sub">Ранее: АО «ТИМ-Элемент» · Арт.Тэго (архитектор-стажёр) · Tiver Group / Мераком</p>
           </div>
           <a class="btn btn-solid" href="experience.html">Смотреть опыт →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- VALUES / GOAL SLIDE -->
+    <section class="section values-section" id="values">
+      <div class="container values-stage">
+        <div class="values-frame reveal">
+          <div class="values-pane is-active" data-pane="0">
+            <p class="section-overline">Ценности</p>
+            <ul class="values-list">
+              <li><strong>Учиться и понимать.</strong> Мне важно не только пользоваться существующими инструментами, но и понимать принципы, системы и процессы, которые стоят за ними.</li>
+              <li><strong>Создавать новое.</strong> Мне интересно не только применять готовые решения, но и разрабатывать собственные методы, системы и подходы.</li>
+              <li><strong>Реализовывать идеи.</strong> Я хочу развивать технические знания настолько, чтобы сложность конструкции, технологии или программирования не становилась ограничением для концептуальной идеи.</li>
+              <li><strong>Соединять разные области.</strong> Мне интересны задачи, которые невозможно полностью решить в рамках одной дисциплины и которые требуют соединения архитектурного, научного и инженерного мышления.</li>
+            </ul>
+          </div>
+          <div class="values-pane" data-pane="1">
+            <p class="section-overline">Цель</p>
+            <p class="values-goal">
+              Развиваться в направлении <strong>исследовательской и вычислительной
+              архитектуры</strong>, соединяя архитектурное проектирование,
+              программирование, научные методы и эксперимент.
+            </p>
+            <p class="values-goal-sub">
+              Мне интересно не только проектировать существующими средствами, но и
+              <strong>исследовать, как могут быть устроены новые архитектурные
+              системы</strong> и как превратить сложную идею в реально работающий объект.
+            </p>
+          </div>
+          <button class="values-arrow" id="values-next" aria-label="Следующий слайд: цель">→</button>
+          <div class="values-dots" id="values-dots" role="tablist">
+            <button class="values-dot is-active" data-go="0" aria-label="Ценности"></button>
+            <button class="values-dot" data-go="1" aria-label="Цель"></button>
+          </div>
         </div>
       </div>
     </section>
@@ -214,7 +251,7 @@
     </div>
   </footer>
 
-  <script src="js/projects-data.js?v=5"></script>
-  <script src="js/main.js?v=5"></script>
+  <script src="js/projects-data.js?v=6"></script>
+  <script src="js/main.js?v=6"></script>
 </body>
 </html>
