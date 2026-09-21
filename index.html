@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=7">
+  <link rel="stylesheet" href="css/style.css?v=8">
   <link rel="stylesheet" href="css/aps-viewer.css?v=2">
 </head>
 <body>
@@ -60,70 +60,59 @@
           <p class="section-overline">01 — Обо мне</p>
           <h2>архитектор+<br>бим-специалист</h2>
         </div>
-        <div class="about-text reveal delay-1">
-          <p>
-            Мне интересна архитектура, как область, в которой соединяются
-            проектирование, технологии, наука и исследования.
-          </p>
-          <p class="about-interests-label">Интересы:</p>
-          <ul class="about-interests">
-            <li><strong>проектные области</strong> — «проектирование», «концептуальное проектирование», поиск новых архитектурных сценариев;</li>
-            <li><strong>разработка сложных архитектурных систем</strong>, в которых форма, конструкция, материал и поведение связаны между собой;</li>
-            <li><strong>использование и применение программирования</strong> как инструмента моделирования и принятия решений;</li>
-            <li><strong>адаптивная архитектура</strong> — системы, способные реагировать на изменение окружающей среды;</li>
-            <li><strong>роботизация и цифровое производство</strong>;</li>
-            <li><strong>исследовательская работа</strong> — на стыке разных дисциплин.</li>
-          </ul>
-          <a class="about-next about-next-row" href="#values">
-            <span>ценности</span>
-            <span aria-hidden="true">→</span>
-          </a>
-        </div>
-          <ul class="about-facts">
-            <li><strong>Образование</strong>НГУАДИ, архитектура, 2021–2026</li>
-            <li><strong>Сейчас</strong>BIM-мастер КР · «ПИК Технологии», Москва</li>
-            <li><strong>Опыт</strong>BIM с 2023: ПИК · ТИМ-Элемент · Tiver Group</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- VALUES / GOAL SLIDE -->
-    <section class="section values-section" id="values">
-      <div class="container values-stage">
-        <div class="values-frame reveal">
-          <div class="values-pane is-active" data-pane="0">
-            <p class="section-overline">Ценности</p>
-            <ul class="values-list">
-              <li><strong>Учиться и понимать.</strong> Мне важно не только пользоваться существующими инструментами, но и понимать принципы, системы и процессы, которые стоят за ними.</li>
-              <li><strong>Создавать новое.</strong> Мне интересно не только применять готовые решения, но и разрабатывать собственные методы, системы и подходы.</li>
-              <li><strong>Реализовывать идеи.</strong> Я хочу развивать технические знания настолько, чтобы сложность конструкции, технологии или программирования не становилась ограничением для концептуальной идеи.</li>
-              <li><strong>Соединять разные области.</strong> Мне интересны задачи, которые невозможно полностью решить в рамках одной дисциплины и которые требуют соединения архитектурного, научного и инженерного мышления.</li>
-            </ul>
+        <div class="about-carousel reveal delay-1" id="about-carousel">
+          <div class="about-track" id="about-track">
+            <div class="about-pane is-active" data-pane="0">
+              <p>
+                Мне интересна архитектура, как область, в которой соединяются
+                проектирование, технологии, наука и исследования.
+              </p>
+              <p class="about-interests-label">Интересы:</p>
+              <ul class="about-interests">
+                <li><strong>проектные области</strong> — «проектирование», «концептуальное проектирование», поиск новых архитектурных сценариев;</li>
+                <li><strong>разработка сложных архитектурных систем</strong>, в которых форма, конструкция, материал и поведение связаны между собой;</li>
+                <li><strong>использование и применение программирования</strong> как инструмента моделирования и принятия решений;</li>
+                <li><strong>адаптивная архитектура</strong> — системы, способные реагировать на изменение окружающей среды;</li>
+                <li><strong>роботизация и цифровое производство</strong>;</li>
+                <li><strong>исследовательская работа</strong> — на стыке разных дисциплин.</li>
+              </ul>
+            </div>
+            <div class="about-pane" data-pane="1">
+              <p class="section-overline">Ценности</p>
+              <ul class="values-list">
+                <li><strong>Учиться и понимать.</strong> Мне важно не только пользоваться существующими инструментами, но и понимать принципы, системы и процессы, которые стоят за ними.</li>
+                <li><strong>Создавать новое.</strong> Мне интересно не только применять готовые решения, но и разрабатывать собственные методы, системы и подходы.</li>
+                <li><strong>Реализовывать идеи.</strong> Я хочу развивать технические знания настолько, чтобы сложность конструкции, технологии или программирования не становилась ограничением для концептуальной идеи.</li>
+                <li><strong>Соединять разные области.</strong> Мне интересны задачи, которые невозможно полностью решить в рамках одной дисциплины и которые требуют соединения архитектурного, научного и инженерного мышления.</li>
+              </ul>
+            </div>
+            <div class="about-pane" data-pane="2">
+              <p class="section-overline">Цель</p>
+              <p class="values-goal">
+                Развиваться в направлении <strong>исследовательской и вычислительной
+                архитектуры</strong>, соединяя архитектурное проектирование,
+                программирование, научные методы и эксперимент.
+              </p>
+              <p class="values-goal-sub">
+                Мне интересно не только проектировать существующими средствами, но и
+                <strong>исследовать, как могут быть устроены новые архитектурные
+                системы</strong> и как превратить сложную идею в реально работающий объект.
+              </p>
+            </div>
           </div>
-          <div class="values-pane" data-pane="1">
-            <p class="section-overline">Цель</p>
-            <p class="values-goal">
-              Развиваться в направлении <strong>исследовательской и вычислительной
-              архитектуры</strong>, соединяя архитектурное проектирование,
-              программирование, научные методы и эксперимент.
-            </p>
-            <p class="values-goal-sub">
-              Мне интересно не только проектировать существующими средствами, но и
-              <strong>исследовать, как могут быть устроены новые архитектурные
-              системы</strong> и как превратить сложную идею в реально работающий объект.
-            </p>
-          </div>
-          <button class="values-arrow" id="values-next" aria-label="Следующий слайд: цель">→</button>
-          <div class="values-dots" id="values-dots" role="tablist">
-            <button class="values-dot is-active" data-go="0" aria-label="Ценности"></button>
-            <button class="values-dot" data-go="1" aria-label="Цель"></button>
+          <div class="about-controls">
+            <div class="about-dots" id="about-dots" role="tablist">
+              <button class="about-dot is-active" data-go="0" aria-label="Обо мне"></button>
+              <button class="about-dot" data-go="1" aria-label="Ценности"></button>
+              <button class="about-dot" data-go="2" aria-label="Цель"></button>
+            </div>
+            <button class="about-arrow" id="about-next" aria-label="Следующий слайд">→</button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- PROJECTS -->
+    <!-- PROJECTS: три избранных лайтбокса + плашка «Все проекты» -->
     <section class="section section-alt" id="projects">
       <div class="container">
         <div class="section-head reveal">
@@ -131,24 +120,17 @@
             <p class="section-overline">02 — Избранные работы</p>
             <h2>Проекты</h2>
           </div>
-          <div class="filters" id="filters">
-            <button class="filter is-active" data-filter="all">Все</button>
-            <button class="filter" data-filter="portfolio">Портфолио</button>
-            <button class="filter" data-filter="diploma">Диплом</button>
-            <button class="filter" data-filter="architecture">Архитектура</button>
-            <button class="filter" data-filter="public">Общественные здания</button>
-            <button class="filter" data-filter="residential">Жилые здания</button>
-            <button class="filter" data-filter="interior">Интерьер</button>
-            <button class="filter" data-filter="structures">Конструкции</button>
-            <button class="filter" data-filter="graphics">Графика</button>
-            <button class="filter" data-filter="practice">Практика</button>
-            <button class="filter" data-filter="research">Исследования</button>
-          </div>
         </div>
 
-        <div class="cards" id="cards"><!-- карточки рендерятся из js/projects-data.js --></div>
+        <div class="cards" id="cards"><!-- карточки рендерятся из js/main.js --></div>
 
-        <p class="all-link reveal"><a class="btn btn-ghost" href="projects.html">Все проекты альбомом →</a></p>
+        <a class="all-plate reveal" href="projects.html">
+          <span class="all-plate-text">
+            <strong>Все проекты</strong>
+            <em>Полный альбом: дипломный проект, курсовые, конструкции, графика и исследования</em>
+          </span>
+          <span class="all-plate-arrow" aria-hidden="true">→</span>
+        </a>
       </div>
     </section>
 
@@ -249,6 +231,22 @@
     </section>
   </main>
 
+  <!-- ЛАЙТБОКС избранных проектов на главной -->
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lb-close" id="lbClose" aria-label="Закрыть">×</button>
+    <button class="lb-arrow lb-prev" id="lbPrev" aria-label="Предыдущий">‹</button>
+    <figure class="lb-stage">
+      <div class="lb-canvas-holder" id="lbHolder"></div>
+      <figcaption class="lb-caption">
+        <span class="lb-counter" id="lbCounter">01 / 03</span>
+        <strong id="lbTitle"></strong>
+        <span id="lbTag"></span>
+        <a class="lb-album" id="lbAlbum" href="#">Открыть страницу проекта →</a>
+      </figcaption>
+    </figure>
+    <button class="lb-arrow lb-next" id="lbNext" aria-label="Следующий">›</button>
+  </div>
+
   <footer class="site-footer">
     <div class="container footer-inner">
       <span>© 2026 Александра Ткачук</span>
@@ -258,11 +256,13 @@
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="js/aps/aps-viewer.js?v=2"></script>
   <script src="js/aps/three-placeholder.js?v=2"></script>
   <script src="js/aps/autodesk-engine.js?v=2"></script>
-  <script src="js/projects-data.js?v=7"></script>
-  <script src="js/main.js?v=7"></script>
+  <script src="js/projects-data.js?v=8"></script>
+  <script src="js/cases-data.js?v=2"></script>
+  <script src="js/main.js?v=8"></script>
   <script>
     // параметрическое семейство в разделе «Семейства Revit»
     if (window.ApsViewer && document.getElementById('aps-family-host')) {

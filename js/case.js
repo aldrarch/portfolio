@@ -11,9 +11,28 @@
       'собирается по материалам. <a href="projects.html">← Все проекты</a></p></div>';
     return;
   }
+  const esc = (s) => String(s).replace(/</g, '&lt;');
+
   document.title = c.title + ' — Александра Ткачук';
 
-  const esc = (s) => String(s).replace(/</g, '&lt;');
+  /* ---------- Заготовка «пустой лист»: страница создана, содержание будет заполнено ---------- */
+  if (c.blank) {
+    root.innerHTML = `
+    <section class="case-hero">
+      <div class="container">
+        <a class="case-back" href="projects.html">← Все проекты</a>
+        <p class="case-overline">Case study — готовится</p>
+        <h1 class="case-title">${esc(c.title)}</h1>
+        <div class="case-blank-note">
+          <p>Страница проекта создана. Содержание — история проектирования по структуре
+          дипломного кейса (анализ → концепция → архитектура → результат) — будет
+          заполнено из материалов альбома.</p>
+          <p><a class="btn btn-solid" href="projects.html">Смотреть все проекты</a></p>
+        </div>
+      </div>
+    </section>`;
+    return;
+  }
 
   /* ---------- утилиты ---------- */
   const blocksHtml = (blocks) => (blocks || []).map(b =>

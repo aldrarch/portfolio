@@ -11,6 +11,28 @@
    ============================================================ */
 
 const CASES = {
+
+  /* ---------- Заготовки case study: «пустые листы» по замечанию из документа ---------- */
+  "portfolio-2026": { title: "Архитектурное портфолио · 2026", blank: true },
+  "river-terminal": { title: "Реконструкция территории с речным вокзалом", blank: true },
+  "apartments":     { title: "Апартаменты", blank: true },
+  "azs":            { title: "АЗС с навесом и кафе", blank: true },
+  "library":        { title: "Интерьер читального зала библиотеки", blank: true },
+  "cafe-canopy":    { title: "Навес с кафе", blank: true },
+  "mzhd":           { title: "Многоэтажное жилое здание (МЖД)", blank: true },
+  "mmzhd":          { title: "Многоэтажное здание (ММЖД)", blank: true },
+  "metall":         { title: "Металлические конструкции", blank: true },
+  "zhbk":           { title: "Железобетонные конструкции", blank: true },
+  "zhbk-montazh":   { title: "Монтаж сборных железобетонных конструкций", blank: true },
+  "wood":           { title: "Деревянные конструкции", blank: true },
+  "practice":       { title: "Отчёт по производственной практике", blank: true },
+  "practice2":      { title: "Отчёт по учебной практике", blank: true },
+  "kembridge":      { title: "Кембридж — Омск", blank: true },
+  "composition-3":  { title: "Объёмно-пространственная композиция", blank: true },
+  "klauzura":       { title: "Клаузура", blank: true },
+  "ofk":            { title: "Композиция · фронтальная графика", blank: true },
+
+  /* ---------- Диплом: полный кейс по первоисточникам ---------- */
   diplom: {
     title: "Научно-исследовательский центр освоения Марса в наукограде Кольцово",
     hero: {

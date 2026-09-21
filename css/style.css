@@ -587,3 +587,68 @@ p { margin: 0 0 1em; }
   border-radius: 999px; padding: 1px 8px; margin-left: 8px;
   vertical-align: 2px; letter-spacing: .04em;
 }
+
+/* ================= Карусель «Обо мне → Ценности → Цель» ================= */
+
+.about-carousel { position: relative; overflow: hidden; }
+.about-track {
+  display: flex;
+  transition: transform .55s cubic-bezier(.4, 0, .2, 1);
+}
+.about-pane {
+  min-width: 100%;
+  box-sizing: border-box;
+  padding-right: 8px;
+}
+.about-controls {
+  display: flex; align-items: center; gap: 22px;
+  margin-top: 28px;
+}
+.about-dots { display: flex; gap: 8px; }
+.about-dot {
+  appearance: none; width: 8px; height: 8px; border-radius: 50%;
+  border: 1px solid var(--ink); background: transparent; cursor: pointer; padding: 0;
+}
+.about-dot.is-active { background: var(--ink); }
+.about-arrow {
+  appearance: none; border: 1px solid var(--ink); background: transparent;
+  border-radius: 50%; width: 44px; height: 44px; cursor: pointer;
+  font-size: 1.1rem; color: var(--ink); line-height: 1;
+  transition: background .2s, color .2s;
+}
+.about-arrow:hover { background: var(--ink); color: #fff; }
+
+/* ================= Плашка «Все проекты» ================= */
+
+.all-plate {
+  margin-top: 34px;
+  display: flex; align-items: center; justify-content: space-between; gap: 18px;
+  padding: 26px 30px;
+  border: 1px solid var(--line); border-radius: 14px;
+  background: var(--surface);
+  text-decoration: none;
+  transition: box-shadow .25s, transform .25s, border-color .25s;
+}
+.all-plate:hover {
+  box-shadow: var(--shadow); transform: translateY(-2px);
+  border-color: var(--ink);
+}
+.all-plate-text strong {
+  display: block; font-family: var(--font-display); font-weight: 400;
+  font-size: 1.3rem; color: var(--ink);
+}
+.all-plate-text em { font-style: normal; color: var(--muted); font-size: .92rem; }
+.all-plate-arrow { font-size: 1.6rem; color: var(--ink); transition: transform .25s; }
+.all-plate:hover .all-plate-arrow { transform: translateX(6px); }
+
+/* ================= Пустой кейс-стади ================= */
+
+.case-blank-note {
+  margin-top: 26px; padding: 28px;
+  border: 1px dashed var(--line); border-radius: 14px;
+  background: var(--surface);
+}
+.case-blank-note p { max-width: 46em; }
+
+/* подпись листа: номер сразу под изображением */
+.sheet figcaption { padding: 6px 2px 0; }

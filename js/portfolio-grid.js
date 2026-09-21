@@ -1,7 +1,6 @@
-/* Плашка «Портфолио» на projects.html:
-   1) миниатюры первых листов портфолио-альбома;
-   2) модальная сетка всех листов portfolio-2026.pdf;
-   3) клик по листу — увеличение + листание вправо-влево. */
+/* Сетка листов портфолио на projects.html:
+   открывается по плашке-фильтру «Портфолио» или клику по карточке портфолио.
+   Модальная сетка всех листов portfolio-2026.pdf + увеличение и листание. */
 (function () {
   'use strict';
   const P = (typeof PROJECTS !== 'undefined') && PROJECTS.find(x => x.id === 'portfolio-2026');
@@ -12,6 +11,7 @@
   const overlay = document.getElementById('pf-overlay');
   const grid = document.getElementById('pf-grid');
   const counter = document.getElementById('pf-grid-counter');
+  if (!overlay || !grid) return;
   let pdfDoc = null, pages = [];
 
   /* ---------- рендер одной страницы в канвас ---------- */
@@ -58,6 +58,7 @@
   /* ---------- увеличение одного листа + листание ---------- */
   const vw = document.createElement('div');
   vw.className = 'pf-viewer';
+  vw.hidden = true;
   vw.innerHTML = `
     <button class="pf-v-close" aria-label="Закрыть">×</button>
     <button class="pf-v-arrow pf-v-prev" aria-label="Предыдущий лист">‹</button>
@@ -73,7 +74,6 @@
     const fig = pages[vIdx];
     const src = fig.querySelector('canvas');
     vCounter.textContent = fig.querySelector('figcaption').textContent;
-    // копируем уже отрендеренный канвас мгновенно; при отсутствии — рендерим заново
     if (src.dataset.done) {
       vCanvas.width = src.width; vCanvas.height = src.height;
       vCanvas.getContext('2d').drawImage(src, 0, 0);
@@ -94,10 +94,11 @@
   vw.querySelector('.pf-v-prev').addEventListener('click', () => stepViewer(-1));
   vw.querySelector('.pf-v-next').addEventListener('click', () => stepViewer(1));
   document.addEventListener('keydown', e => {
-    if (vw.hidden) return;
-    if (e.key === 'Escape') vw.hidden = true;
-    if (e.key === 'ArrowLeft') stepViewer(-1);
-    if (e.key === 'ArrowRight') stepViewer(1);
+    if (!vw.hidden) {
+      if (e.key === 'Escape') vw.hidden = true;
+      if (e.key === 'ArrowLeft') stepViewer(-1);
+      if (e.key === 'ArrowRight') stepViewer(1);
+    }
   });
   let tx = null;
   vw.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
@@ -108,29 +109,25 @@
     tx = null;
   }, { passive: true });
 
-  /* ---------- миниатюры на плашке (первые 4 листа) ---------- */
-  async function plateThumbs() {
-    const wrap = document.getElementById('portfolio-plate-thumbs');
-    if (!wrap) return;
-    try {
-      const doc = await pdfjsLib.getDocument(P.src).promise;
-      const figs = [];
-      for (let n = 1; n <= Math.min(4, doc.numPages); n++) {
-        const fig = document.createElement('figure');
-        fig.className = 'plate-thumb';
-        const c = document.createElement('canvas');
-        fig.appendChild(c);
-        wrap.appendChild(fig);
-        figs.push(renderPage(n, c, 520));
-      }
-      await Promise.all(figs);
-    } catch (e) { void e; wrap.hidden = true; }
+  /* ---------- триггеры открытия сетки ---------- */
+  const openBtn = document.getElementById('open-portfolio-grid');
+  if (openBtn) openBtn.addEventListener('click', openGrid);
+
+  /* фильтр «Портфолио» открывает сетку вместо фильтрации */
+  const pfFilter = document.querySelector('#filters .filter[data-filter="portfolio"]');
+  if (pfFilter) {
+    pfFilter.addEventListener('click', e => {
+      e.stopImmediatePropagation();
+      /* снять активность с фильтров, вернуть «Все» */
+      document.querySelectorAll('#filters .filter').forEach(b => b.classList.remove('is-active'));
+      document.querySelector('#filters .filter[data-filter="all"]').classList.add('is-active');
+      document.querySelectorAll('.sheets .sheet').forEach(sh => sh.classList.remove('is-hidden'));
+      openGrid();
+    }, true);
   }
 
-  document.getElementById('open-portfolio-grid').addEventListener('click', openGrid);
-  document.getElementById('pf-grid-close').addEventListener('click', closeGrid);
+  const closeBtn = document.getElementById('pf-grid-close');
+  if (closeBtn) closeBtn.addEventListener('click', closeGrid);
   overlay.addEventListener('click', e => { if (e.target === overlay) closeGrid(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !overlay.hidden) closeGrid(); });
-
-  plateThumbs();
 })();
