@@ -1,0 +1,25 @@
+{
+  "models": [
+    {
+      "id": "demo",
+      "title": "Демо-модель (двухэтажный павильон)",
+      "engine": "placeholder",
+      "urn": null,
+      "note": "Плейсхолдер на three.js. После загрузки RVT замените engine на autodesk и впишите urn."
+    },
+    {
+      "id": "mars",
+      "title": "Центр освоения Марса — BIM-модель",
+      "engine": "autodesk",
+      "urn": null,
+      "note": "Положите projects/mars/model.rvt и выполните py tools/aps-upload.py projects/mars/model.rvt"
+    },
+    {
+      "id": "climate-study",
+      "title": "Climate study — BIM-модель",
+      "engine": "autodesk",
+      "urn": null,
+      "note": "Положите projects/climate-study/model.rvt и выполните py tools/aps-upload.py projects/climate-study/model.rvt"
+    }
+  ]
+}

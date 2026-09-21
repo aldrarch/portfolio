@@ -5,6 +5,18 @@
 
 const PROJECTS = [
   {
+    id: "bim-demo",
+    type: "aps",
+    title: "Интерактивная BIM-модель (демо)",
+    tag: "BIM · 3D",
+    year: 2026,
+    cat: ["portfolio", "research"],
+    tools: "APS Viewer · Revit · three.js",
+    desc: "Встраиваемый 3D-вьюер: орбита/зум/пан, выбор элементов, скрытие и изоляция категорий, разрез и параметры. Демо-модель; сюда подключаются реальные RVT через Autodesk Platform Services.",
+    cover: "",
+    src: "album.html?p=bim-demo"
+  },
+  {
     id: "portfolio-2026",
     title: "Архитектурное портфолио",
     tag: "Сводный альбом · 2026",

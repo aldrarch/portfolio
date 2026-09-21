@@ -11,6 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=3">
   <link rel="stylesheet" href="css/album.css?v=3">
+  <link rel="stylesheet" href="css/aps-viewer.css?v=1">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 </head>
 <body class="album-body">
@@ -29,8 +31,23 @@
       <div class="album-loader-bar"><span></span></div>
       <p id="album-loader-text">Загрузка альбома…</p>
     </div>
-    <!-- листы альбома рендерятся из js/album.js -->
+    <!-- листы альбома или 3D-вьюер рендерятся из js/album.js -->
   </main>
+
+  <!-- Интерактивная модель (APS) — рендерится только для type: "aps" -->
+  <section class="aps-section" id="aps-section" hidden>
+    <div class="container">
+      <div class="aps-section-head">
+        <div>
+          <p class="section-overline">Интерактивная модель</p>
+          <h2 class="aps-section-title">BIM-модель проекта</h2>
+          <p class="aps-section-sub">Орбита · зум · выбор элементов · категории · разрез</p>
+        </div>
+      </div>
+      <div id="aps-host"></div>
+      <p class="aps-note">Демо-модель. Реальные RVT подключаются через Autodesk Platform Services — см. README раздел «Как подключить модель».</p>
+    </div>
+  </section>
 
   <nav class="album-nextnav" id="album-nextnav">
     <a href="#" id="album-next-link">
@@ -46,6 +63,9 @@
   </footer>
 
   <script src="js/projects-data.js?v=3"></script>
+  <script src="js/aps/aps-viewer.js"></script>
+  <script src="js/aps/three-placeholder.js"></script>
+  <script src="js/aps/autodesk-engine.js"></script>
   <script src="js/album.js?v=3"></script>
 </body>
 </html>

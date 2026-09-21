@@ -132,7 +132,15 @@ async function renderPdf() {
 }
 
 /* ---------- Запуск ---------- */
-if (project.type === 'image') {
+if (project.type === 'aps') {
+  // интерактивная 3D-модель вместо листов альбома
+  hideLoader();
+  main.hidden = true;
+  const sec = document.getElementById('aps-section');
+  sec.hidden = false;
+  counter.textContent = '3D';
+  window.__aps = window.ApsViewer.mount(document.getElementById('aps-host'), { projectId: 'demo' });
+} else if (project.type === 'image') {
   showImage();
 } else {
   renderPdf();
