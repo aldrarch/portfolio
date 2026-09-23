@@ -463,12 +463,6 @@ p { margin: 0 0 1em; }
 
 .revit-viewer-lead { color: #39414b; margin: 0 0 14px; font-size: .95rem; }
 
-#aps-family-host {
-  height: clamp(380px, 55vh, 560px);
-  border-radius: 14px;
-  border: 1px solid var(--line);
-}
-
 #aps-family-host.aps-mount { background: #101216; }
 
 /* ================= Плашка «Портфолио» + сетка листов ================= */
@@ -679,4 +673,67 @@ p { margin: 0 0 1em; }
 .pf-page-grid .pf-cell.is-broken::after {
   content: 'лист недоступен'; display: block; padding: 30px;
   color: var(--muted); font-size: .85rem; text-align: center;
+}
+
+/* ================= v9: hero на весь экран, BIM в Revit, карусель ================= */
+
+/* --- Hero: занимает первый экран --- */
+.hero {
+  min-height: calc(100vh - 64px);
+  display: flex;
+  align-items: flex-start;
+}
+.hero .hero-grid { width: 100%; align-content: start; }
+.hero .hero-overline { margin-top: clamp(48px, 12vh, 140px); }
+
+/* --- «Обо мне»: карточка с текстом налево --- */
+.about-pane {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 44px 52px;
+  text-align: left;
+}
+.about-pane p,
+.about-pane li,
+.about-pane .about-interests-label { text-align: left; }
+.about-pane .section-overline {
+  text-align: left;
+  margin-bottom: 18px;
+  font-size: .82rem;
+}
+.about-pane p:first-child { margin-top: 0; }
+.about-pane li strong,
+.about-pane p strong { font-weight: 600; }
+.about-pane p,
+.about-pane li { font-size: 1.02rem; line-height: 1.65; }
+
+/* --- BIM в Revit: шапка + вьюер на всю ширину + лента семейств --- */
+.revit-head {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 28px; flex-wrap: wrap; margin-bottom: 26px;
+}
+.revit-head .revit-lead { max-width: 46ch; margin: 0; }
+.revit-viewer-wide {
+  height: clamp(420px, 62vh, 640px);
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.revit-viewer-wide.aps-mount { background: #101216; }
+.revit-files-band { margin-top: 26px; }
+.revit-files-title {
+  font-weight: 600; margin: 0 0 14px; color: var(--ink);
+}
+.revit-files-band .revit-files { flex-direction: row; flex-wrap: wrap; }
+.revit-files-band .revit-file {
+  flex: 1 1 260px; min-width: 240px;
+}
+.revit-file a { color: var(--accent); font-weight: 600; text-decoration: none; margin-left: 4px; }
+.revit-file a:hover { text-decoration: underline; }
+
+@media (max-width: 860px) {
+  .hero .hero-overline { margin-top: 40px; }
+  .about-pane { padding: 30px 24px; }
+  .revit-viewer-wide { height: clamp(320px, 50vh, 480px); }
 }
