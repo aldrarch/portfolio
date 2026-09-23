@@ -91,7 +91,7 @@ p { margin: 0 0 1em; }
 .btn-ghost:hover { background: var(--ink); color: #fff; }
 
 /* ---------- About ---------- */
-.about-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; }
+.about-grid { display: grid; grid-template-columns: .52fr 1.48fr; gap: 48px; }
 .about-text p { color: #39414b; }
 .about-facts { list-style: none; margin: 22px 0 0; padding: 0; }
 .about-facts li { padding: 12px 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 140px 1fr; gap: 12px; font-size: .95rem; }
