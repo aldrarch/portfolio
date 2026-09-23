@@ -15,3 +15,4 @@ tools/depth-lines.py
 tools/depth-per-line.py
 tools/trace-js.py
 tools/prep-case-assets.py
+tools/js-smoke.py
