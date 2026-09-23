@@ -4,3 +4,14 @@ tools/docx-view.html
 tools/docx-media/
 .DS_Store
 Thumbs.db
+tools/cand-view.html
+tools/case-view.html
+tools/gp-view.html
+tools/img3.html
+tools/text-probe.html
+tools/bracket-pairs.py
+tools/check-js.py
+tools/depth-lines.py
+tools/depth-per-line.py
+tools/trace-js.py
+tools/prep-case-assets.py
