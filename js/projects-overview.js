@@ -1,5 +1,6 @@
-/* Все проекты (projects.html): листы-миниатюры, фильтры, лайтбокс с увеличением
-   и листанием альбома. Первые страницы PDF рендерятся через pdf.js по требованию. */
+/* Все проекты (projects.html): листы-миниатюры, фильтры.
+   Клик по любому проекту — прямой переход на страницу кейса.
+   (PDF-лайтбокс удалён по замечанию — файлы проектов встроены в кейс-страницы.) */
 
 if (window.pdfjsLib) {
   pdfjsLib.GlobalWorkerOptions.workerSrc =
@@ -44,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
       lastCourse = co;
     }
     num++;
-    const isCase = typeof CASES !== 'undefined' && CASES[p.id];
     const isPortfolio = p.id === 'portfolio-2026';
     const mediaInner = p.cover
       ? `<img src="${p.cover}" alt="${p.title}" loading="lazy">`
@@ -53,15 +53,15 @@ document.addEventListener('DOMContentLoaded', () => {
     fig.className = 'sheet reveal';
     fig.dataset.i = order[oi];
     fig.dataset.cat = (p.cat || []).join(' ');
-    fig.dataset.href = isPortfolio ? 'portfolio.html' : (isCase ? `project.html?p=${p.id}` : '');
+    fig.dataset.href = isPortfolio ? 'portfolio.html' : `project.html?p=${p.id}`;
     fig.tabIndex = 0;
-    fig.setAttribute('role', 'button');
+    fig.setAttribute('role', 'link');
     fig.setAttribute('aria-label', p.title);
     fig.innerHTML = `
       <div class="sheet-media">${mediaInner}</div>
       <figcaption>
         <span class="sheet-num">${pad(num)}</span>
-        <span class="sheet-title">${p.title}${isPortfolio ? ' <em class="case-mark">сетка листов</em>' : isCase ? ' <em class="case-mark">case study</em>' : ''}</span>
+        <span class="sheet-title">${p.title}${isPortfolio ? ' <em class="case-mark">сетка листов</em>' : ''}</span>
         <span class="sheet-tag">${p.tag}</span>
       </figcaption>`;
     wrap.appendChild(fig);
@@ -94,129 +94,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ---------- Лайтбокс ---------- */
-  const lb = document.getElementById('lightbox');
-  const holder = document.getElementById('lbHolder');
-  const elCounter = document.getElementById('lbCounter');
-  const elTitle = document.getElementById('lbTitle');
-  const elTag = document.getElementById('lbTag');
-  const elAlbum = document.getElementById('lbAlbum');
-  let current = 0;
-  const pageCache = new Map(); // id -> dataURL первой страницы PDF
-
-  function visibleIndices() {
-    const idx = [];
-    document.querySelectorAll('.sheets .sheet:not(.is-hidden)').forEach(sh => idx.push(+sh.dataset.i));
-    return idx;
-  }
-
-  async function firstPageDataURL(project) {
-    if (project.type !== 'pdf' || !window.pdfjsLib) return null;
-    if (pageCache.has(project.id)) return pageCache.get(project.id);
-    const doc = await pdfjsLib.getDocument(project.src).promise;
-    const page = await doc.getPage(1);
-    const base = page.getViewport({ scale: 1 });
-    const scale = Math.min(1400 / base.width, 2);
-    const viewport = page.getViewport({ scale });
-    const canvas = document.createElement('canvas');
-    canvas.width = viewport.width; canvas.height = viewport.height;
-    await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
-    const url = canvas.toDataURL('image/jpeg', 0.85);
-    pageCache.set(project.id, url);
-    return url;
-  }
-
-  async function show(project) {
-    elTitle.textContent = project.title;
-    elTag.textContent = project.tag;
-    const isCase = typeof CASES !== 'undefined' && CASES[project.id];
-    if (project.id === 'portfolio-2026') {
-      elAlbum.href = 'portfolio.html';
-      elAlbum.textContent = 'Сетка листов портфолио →';
-    } else if (isCase) {
-      elAlbum.href = `project.html?p=${project.id}`;
-      elAlbum.textContent = 'Открыть case study →';
-    } else if (project.type === 'pdf') {
-      elAlbum.href = `album.html?p=${project.id}`;
-      elAlbum.textContent = 'Открыть весь альбом →';
-    } else {
-      elAlbum.href = project.src;
-      elAlbum.textContent = 'Открыть лист →';
-    }
-    holder.innerHTML = '<div class="lb-loading">Загрузка листа…</div>';
-    try {
-      const url = await firstPageDataURL(project);
-      if (currentProject !== project) return; // пользователь уже перелистнул
-      holder.innerHTML = url
-        ? `<img src="${url}" alt="${project.title}">`
-        : `<img src="${project.src}" alt="${project.title}">`;
-    } catch (e) {
-      if (currentProject !== project) return;
-      holder.innerHTML = `<div class="lb-loading">Не удалось открыть PDF — <a href="${project.src}" target="_blank">скачать файл</a></div>`;
-    }
-  }
-
-  let currentProject = null;
-
-  function openAt(i) {
-    current = i;
-    currentProject = PROJECTS[i];
-    const vis = visibleIndices();
-    elCounter.textContent = `${pad(vis.indexOf(i) + 1)} / ${pad(vis.length)}`;
-    lb.hidden = false;
-    document.body.style.overflow = 'hidden';
-    show(currentProject);
-  }
-
-  function step(dir) {
-    const vis = visibleIndices();
-    if (!vis.length) return;
-    let pos = vis.indexOf(current);
-    pos = (pos + dir + vis.length) % vis.length;
-    openAt(vis[pos]);
-  }
-
-  function close() {
-    lb.hidden = true;
-    document.body.style.overflow = '';
-    currentProject = null;
-  }
-
+  /* ---------- Переход на страницу кейса ---------- */
   wrap.addEventListener('click', e => {
     const sh = e.target.closest('.sheet');
     if (!sh) return;
-    if (sh.dataset.href) { location.href = sh.dataset.href; return; } // уникальные страницы — прямой переход
-    openAt(+sh.dataset.i);
+    if (sh.dataset.href) location.href = sh.dataset.href;
   });
   wrap.addEventListener('keydown', e => {
     const sh = e.target.closest('.sheet');
-    if (sh && (e.key === 'Enter' || e.key === ' ')) {
+    if (sh && (e.key === 'Enter' || e.key === ' ') && sh.dataset.href) {
       e.preventDefault();
-      if (sh.dataset.href) { location.href = sh.dataset.href; return; }
-      openAt(+sh.dataset.i);
+      location.href = sh.dataset.href;
     }
   });
-
-  document.getElementById('lbClose').addEventListener('click', close);
-  document.getElementById('lbPrev').addEventListener('click', () => step(-1));
-  document.getElementById('lbNext').addEventListener('click', () => step(1));
-  lb.addEventListener('click', e => { if (e.target === lb) close(); });
-  document.addEventListener('keydown', e => {
-    if (lb.hidden) return;
-    if (e.key === 'Escape') close();
-    if (e.key === 'ArrowLeft') step(-1);
-    if (e.key === 'ArrowRight') step(1);
-  });
-
-  /* Свайп на мобильных */
-  let touchX = null;
-  lb.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
-  lb.addEventListener('touchend', e => {
-    if (touchX === null) return;
-    const dx = e.changedTouches[0].clientX - touchX;
-    if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1);
-    touchX = null;
-  }, { passive: true });
 
   /* ---------- Мобильное меню ---------- */
   const burger = document.getElementById('burger');

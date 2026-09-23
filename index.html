@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=9">
+  <link rel="stylesheet" href="css/style.css?v=10">
   <link rel="stylesheet" href="css/aps-viewer.css?v=2">
 </head>
 <body>
@@ -67,7 +67,7 @@
                 Мне интересна архитектура, как область, в которой соединяются
                 проектирование, технологии, наука и исследования.
               </p>
-              <p class="about-interests-label">Интересы:</p>
+              <p class="section-overline">Интересы</p>
               <ul class="about-interests">
                 <li><strong>проектные области</strong> — «проектирование», «концептуальное проектирование», поиск новых архитектурных сценариев;</li>
                 <li><strong>разработка сложных архитектурных систем</strong>, в которых форма, конструкция, материал и поведение связаны между собой;</li>
@@ -175,7 +175,7 @@
         <div class="revit-viewer-wide reveal" id="aps-family-host"></div>
 
         <div class="revit-files-band">
-          <p class="revit-files-title">Семейства для просмотра</p>
+          <p class="revit-files-title">Модели для просмотра</p>
           <div class="revit-files">
             <div class="revit-file"><span class="rfa-badge">RFA</span>
               <div><strong>Отверстие прямоугольное (в плите)</strong>
@@ -224,21 +224,6 @@
     </section>
   </main>
 
-  <!-- ЛАЙТБОКС избранных проектов на главной -->
-  <div class="lightbox" id="lightbox" hidden>
-    <button class="lb-close" id="lbClose" aria-label="Закрыть">×</button>
-    <button class="lb-arrow lb-prev" id="lbPrev" aria-label="Предыдущий">‹</button>
-    <figure class="lb-stage">
-      <div class="lb-canvas-holder" id="lbHolder"></div>
-      <figcaption class="lb-caption">
-        <span class="lb-counter" id="lbCounter">01 / 03</span>
-        <strong id="lbTitle"></strong>
-        <span id="lbTag"></span>
-        <a class="lb-album" id="lbAlbum" href="#">Открыть страницу проекта →</a>
-      </figcaption>
-    </figure>
-    <button class="lb-arrow lb-next" id="lbNext" aria-label="Следующий">›</button>
-  </div>
 
   <footer class="site-footer">
     <div class="container footer-inner">
@@ -254,8 +239,8 @@
   <script src="js/aps/three-placeholder.js?v=2"></script>
   <script src="js/aps/autodesk-engine.js?v=2"></script>
   <script src="js/projects-data.js?v=8"></script>
-  <script src="js/cases-data.js?v=2"></script>
-  <script src="js/main.js?v=9"></script>
+  <script src="js/cases-data.js?v=4"></script>
+  <script src="js/main.js?v=10"></script>
   <script>
     // параметрическое семейство в разделе «Семейства Revit»
     if (window.ApsViewer && document.getElementById('aps-family-host')) {

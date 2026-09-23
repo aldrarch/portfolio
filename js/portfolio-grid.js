@@ -18,7 +18,7 @@
     const scale = Math.min((maxW || 900) / base.width, 2);
     const vp = page.getViewport({ scale });
     canvas.width = Math.floor(vp.width); canvas.height = Math.floor(vp.height);
-    canvas.style.aspectRatio = `${canvas.width} / ${canvas.height}`;
+    canvas.style.aspectRatio = "";
     await page.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise;
     canvas.dataset.done = '1';
   }

@@ -15,22 +15,42 @@
 
   document.title = c.title + ' — Александра Ткачук';
 
-  /* ---------- Заготовка «пустой лист»: страница создана, содержание будет заполнено ---------- */
+  /* ---------- Заготовка: страница проекта с встроенным документом ---------- */
   if (c.blank) {
     root.innerHTML = `
     <section class="case-hero">
       <div class="container">
         <a class="case-back" href="projects.html">← Все проекты</a>
-        <p class="case-overline">Case study — готовится</p>
+        <p class="case-overline">Проект</p>
         <h1 class="case-title">${esc(c.title)}</h1>
         <div class="case-blank-note">
-          <p>Страница проекта создана. Содержание — история проектирования по структуре
-          дипломного кейса (анализ → концепция → архитектура → результат) — будет
-          заполнено из материалов альбома.</p>
-          <p><a class="btn btn-solid" href="projects.html">Смотреть все проекты</a></p>
+          <p>Материалы проекта — ниже; страница дополнится описанием по мере подготовки.</p>
         </div>
       </div>
+    </section>
+    <section class="case-section">
+      <div class="container">
+        ${c.doc ? (c.isImage
+          ? `<figure class="case-fig-wide case-doc-embed"><img src="${c.doc}" alt="${esc(c.title)}"></figure>
+             <p class="case-muted"><a href="${c.doc}" target="_blank" download>Открыть в новом окне</a></p>`
+          : `<div class="case-doc-embed" id="doc-embed"></div>
+             <p class="case-muted"><a href="${c.doc}" target="_blank">Открыть документ в новом окне</a>${c.docLabel ? ' · ' + esc(c.docLabel) : ''}</p>`
+        ) : ''}
+      </div>
     </section>`;
+
+    /* встроенный PDF-просмотрщик */
+    if (c.doc && !c.isImage && window.pdfjsLib) {
+      pdfjsLib.GlobalWorkerOptions.workerSrc =
+        'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      const host = document.getElementById('doc-embed');
+      pdfjsLib.getDocument(c.doc).promise.then(() => {
+        const iframe = document.createElement('iframe');
+        iframe.src = c.doc; iframe.title = c.title;
+        iframe.style.cssText = 'width:100%;height:min(78vh,900px);border:1px solid var(--line);border-radius:12px;background:#fff;display:block';
+        host.appendChild(iframe);
+      }).catch(() => { host.innerHTML = '<p class="case-muted">Документ временно недоступен.</p>'; });
+    }
     return;
   }
 
@@ -70,7 +90,6 @@
         <div><dt>Инструменты</dt><dd>${esc(h.tools || '')}</dd></div>
       </div>
     </div>
-    ${h.image ? `<figure class="case-hero-img"><img src="${h.image}" alt="${esc(c.title)}"></figure>` : ''}
   </section>`;
 
   /* ---------- 01 О проекте ---------- */

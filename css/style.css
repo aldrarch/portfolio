@@ -737,3 +737,31 @@ p { margin: 0 0 1em; }
   .about-pane { padding: 30px 24px; }
   .revit-viewer-wide { height: clamp(320px, 50vh, 480px); }
 }
+
+/* ================= v10: «Обо мне» выше, карточка компактнее ================= */
+
+/* hero чуть ниже — «Обо мне» ближе к первому экрану */
+.hero { min-height: calc(88vh - 64px); }
+.hero .hero-overline { margin-top: clamp(28px, 7vh, 80px); }
+
+/* карусель: высота по активному слайду (height ставит main.js) */
+.about-track { position: relative; transition: height .45s cubic-bezier(.4,0,.2,1), transform .55s cubic-bezier(.4,0,.2,1); }
+.about-pane { position: absolute; top: 0; left: 0; width: 100%; min-width: 100%; }
+.about-controls { margin-top: 18px; }
+
+/* крупнее текст, заголовки-оверлайны в карточке */
+.about-pane p, .about-pane li { font-size: 1.08rem; line-height: 1.7; }
+.about-pane .section-overline { font-size: .84rem; letter-spacing: .14em; margin-bottom: 14px; }
+.about-pane p + .section-overline { margin-top: 26px; }
+
+@media (max-width: 860px) {
+  .hero { min-height: calc(78vh - 64px); }
+}
+
+/* сетка портфолио: одинаковая высота ячеек — фиксированное соотношение canvas */
+.pf-page-grid .pf-cell { display: flex; flex-direction: column; }
+.pf-page-grid .pf-cell canvas {
+  width: 100%; aspect-ratio: 3 / 2;
+  object-fit: contain; background: #fff;
+}
+.pf-page-grid .pf-cell figcaption { white-space: nowrap; }
