@@ -647,6 +647,543 @@ p { margin: 0 0 1em; }
 /* подпись листа: номер сразу под изображением */
 .sheet figcaption { padding: 6px 2px 0; }
 
+/* ================= Дополнительная навигация в разделе ================= */
+
+.section-head-extra {
+  margin-left: auto;
+}
+
+.section-extra-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .85rem;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  transition: gap .2s;
+}
+
+.section-extra-link:hover {
+  gap: 12px;
+}
+
+.section-extra-arrow {
+  transition: transform .2s;
+}
+
+.section-extra-link:hover .section-extra-arrow {
+  transform: translateX(4px);
+}
+
+/* ================= Навигация: Размышления ================= */
+
+.nav-thoughts {
+  color: var(--ink);
+  font-weight: 500;
+  position: relative;
+}
+
+.nav-arrow {
+  font-size: .75rem;
+  margin-left: 4px;
+  transition: transform .2s;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.nav-thoughts:hover .nav-arrow {
+  transform: translateX(4px);
+}
+
+/* ================= Размышления на главной ================= */
+
+.thoughts-container {
+  max-width: 720px;
+}
+
+.thoughts-entry {
+  margin-top: 20px;
+}
+
+.thoughts-label {
+  font-size: .78rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.thoughts-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  transition: gap .2s;
+}
+
+.thoughts-link:hover {
+  gap: 14px;
+}
+
+.thoughts-arrow {
+  font-size: 1.1rem;
+  transition: transform .2s;
+}
+
+.thoughts-link:hover .thoughts-arrow {
+  transform: translateX(4px);
+}
+
+.thoughts-preview {
+  margin-top: 32px;
+}
+
+.thoughts-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  box-shadow: var(--shadow);
+}
+
+.thoughts-date {
+  font-size: .78rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+
+.thoughts-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  margin: 0 0 14px;
+  line-height: 1.3;
+}
+
+.thoughts-excerpt {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0 0 20px;
+}
+
+.thoughts-read-more {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: .92rem;
+}
+
+.thoughts-read-more:hover {
+  text-decoration: underline;
+}
+
+/* ================= Страница размышлений ================= */
+
+.thoughts-page {
+  max-width: 780px;
+}
+
+.thought-article {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 48px 52px;
+  margin-bottom: 32px;
+  box-shadow: var(--shadow);
+}
+
+.thought-date {
+  font-size: .8rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin: 0 0 14px;
+}
+
+.thought-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  margin: 0 0 24px;
+  line-height: 1.3;
+}
+
+.thought-body {
+  color: #39414b;
+  font-size: 1.04rem;
+  line-height: 1.8;
+}
+
+.thought-body p {
+  margin: 0 0 1.4em;
+}
+
+.thought-body p:first-child::first-letter {
+  font-family: var(--font-display);
+  font-size: 3.2rem;
+  float: left;
+  line-height: 0.8;
+  padding: 8px 12px 0 0;
+  color: var(--ink);
+}
+
+.thought-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.thought-tag {
+  font-size: .76rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.thought-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.thought-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: .92rem;
+  transition: color .2s, gap .2s;
+}
+
+.thought-nav-link:hover {
+  color: var(--ink);
+  gap: 14px;
+}
+
+.thought-nav-arrow {
+  transition: transform .2s;
+}
+
+.thought-nav-link:hover .thought-nav-arrow {
+  transform: translateX(4px);
+}
+
+.thought-overline {
+  font-size: .78rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+
+/* ================= Список статей ================= */
+
+.articles-section {
+  padding: 80px 0;
+}
+
+.articles-list {
+  display: grid;
+  gap: 24px;
+  margin-top: 36px;
+}
+
+.article-item {
+  display: flex;
+  gap: 20px;
+  padding: 24px 28px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  transition: transform .2s, box-shadow .2s, border-color .2s;
+  text-decoration: none;
+}
+
+.article-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  border-color: var(--ink);
+}
+
+.article-date {
+  font-size: .76rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  flex-shrink: 0;
+  padding-top: 4px;
+}
+
+.article-content {
+  flex: 1;
+}
+
+.article-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin: 0 0 6px;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.article-excerpt {
+  color: var(--muted);
+  font-size: .92rem;
+  line-height: 1.6;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.article-arrow {
+  flex-shrink: 0;
+  color: var(--muted);
+  transition: transform .2s, color .2s;
+}
+
+.article-item:hover .article-arrow {
+  color: var(--ink);
+  transform: translateX(4px);
+}
+
+/* ================= Статьи (отдельные страницы) ================= */
+
+.article-page-header {
+  padding-bottom: 32px;
+}
+
+.article-page-header .section-overline {
+  margin-bottom: 8px;
+}
+
+.article-page-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin: 0 0 16px;
+  line-height: 1.2;
+}
+
+.article-page-meta {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.article-meta-date {
+  font-size: .82rem;
+  color: var(--muted);
+}
+
+.article-meta-tag {
+  font-size: .76rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.article-content-page {
+  max-width: 720px;
+  color: #39414b;
+  font-size: 1.04rem;
+  line-height: 1.85;
+}
+
+.article-content-page p {
+  margin: 0 0 1.5em;
+}
+
+.article-content-page p:first-child::first-letter {
+  font-family: var(--font-display);
+  font-size: 3.6rem;
+  float: left;
+  line-height: 0.8;
+  padding: 10px 14px 0 0;
+  color: var(--ink);
+}
+
+.article-content-page h2 {
+  font-size: 1.5rem;
+  margin: 2em 0 0.8em;
+}
+
+.article-content-page h3 {
+  font-size: 1.15rem;
+  margin: 1.5em 0 0.6em;
+  color: var(--ink);
+}
+
+.article-content-page blockquote {
+  margin: 2em 0;
+  padding: 20px 28px;
+  background: var(--bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.article-nav-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: .9rem;
+  margin-top: 40px;
+  padding: 12px 0;
+  transition: color .2s, gap .2s;
+}
+
+.article-nav-back:hover {
+  color: var(--ink);
+  gap: 14px;
+}
+
+/* ================= Темы размышлений ================= */
+
+.topics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 36px;
+}
+
+.topic-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 28px 28px 24px;
+  transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+
+.topic-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  border-color: var(--ink);
+}
+
+.topic-icon {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+}
+
+.topic-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin: 0 0 10px;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.topic-desc {
+  color: var(--muted);
+  font-size: .92rem;
+  line-height: 1.6;
+  margin: 0 0 18px;
+}
+
+.topic-articles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.topic-articles li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.topic-articles li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.topic-articles a {
+  font-size: .92rem;
+  color: var(--ink);
+  text-decoration: none;
+  transition: color .2s;
+}
+
+.topic-articles a:hover {
+  color: var(--accent);
+}
+
+.topic-date {
+  font-size: .76rem;
+  color: var(--muted);
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+
+@media (max-width: 600px) {
+  .topics-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .thought-nav {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .thought-article {
+    padding: 32px 24px;
+  }
+  
+  .thoughts-card {
+    padding: 22px 24px;
+  }
+  
+  .articles-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .article-item {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .article-arrow {
+    align-self: flex-end;
+  }
+}
+
 /* ================= Страница-сетка портфолио (portfolio.html) ================= */
 
 .pf-page-grid {
