@@ -772,68 +772,6 @@ p { margin: 0 0 1em; }
   margin: 0 0 6px;
 }
 
-/* ================= Размышления ================= */
-
-.thoughts-entry-section {
-  padding: 80px 0 40px;
-}
-
-.thoughts-entry-section__inner {
-  max-width: 1100px;
-}
-
-.thoughts-entry-section__row {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 48px;
-  flex-wrap: wrap;
-}
-
-.thoughts-entry-section__text {
-  flex: 1 1 560px;
-}
-
-.thoughts-entry-section__title {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 3rem);
-  line-height: 1.2;
-  margin: 0 0 16px;
-}
-
-.thoughts-entry-section__lead {
-  color: var(--muted);
-  font-size: 1.05rem;
-  line-height: 1.7;
-  margin: 0;
-}
-
-.thoughts-entry-section__link {
-  flex: 0 0 auto;
-}
-
-.thoughts-entry-section__button {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px 28px;
-  background: var(--accent);
-  color: #fff;
-  font-weight: 700;
-  border-radius: 999px;
-  text-decoration: none;
-  transition: background .2s, transform .2s;
-}
-
-.thoughts-entry-section__button:hover {
-  background: var(--accent-dark);
-  transform: translateY(-2px);
-}
-
-.thoughts-entry-section__arrow {
-  font-size: 1.2rem;
-}
-
 /* ===== Страница размышлений ===== */
 
 .thoughts-page {
