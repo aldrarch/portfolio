@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Размышления — Александра Ткачук</title>
+  <meta name="description" content="Размышления: мысли, заметки и архитектурные эссе.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231647e3'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-family='Georgia'%3E%D0%90%D0%A2%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=11">
+</head>
+<body>
+
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">АТ<span class="logo-dot">.</span></a>
+      <nav class="nav">
+        <a href="index.html#about">Обо мне</a>
+        <a href="projects.html">Проекты</a>
+        <a href="thoughts.html" class="is-current">Размышления <span class="nav-arrow">→</span></a>
+        <a href="experience.html">Опыт</a>
+        <a href="index.html#skills">Навыки</a>
+        <a href="index.html#revit">BIM / Revit</a>
+        <a href="index.html#contacts" class="nav-cta">Контакты</a>
+      </nav>
+      <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HEADER -->
+    <section class="section thoughts-page">
+      <div class="container">
+        <div class="thoughts-header">
+          <p class="thoughts-overline">02 — Размышления</p>
+          <h1 class="thoughts-title">Мысли и заметки</h1>
+          <div class="thoughts-actual">
+            <span class="thoughts-actual-icon">●</span>
+            <span>АКТУАЛЬНАЯ ЗАПИСЬ</span>
+          </div>
+        </div>
+
+        <!-- Актуальная статья -->
+        <article class="thought-article">
+          <p class="thought-date">07.2024</p>
+          <h2 class="thought-title">Архитектурные заметки</h2>
+          <div class="thought-body">
+            <p>Недостатки работ в том, что я слишком далеко ухожу в интерпретациях. Мысль творчески — это, оказалось, довольно сложно, как и стараться придумать интерпретацию чему-то и найти новый способ это изобразить. Поэтому в этой записи я просто хочу осмысленно превратить наработки и идеи в форму, а не оставлять их разрознено.</p>
+          </div>
+
+          <div class="thought-tags">
+            <span class="thought-tag">Архитектура</span>
+            <span class="thought-tag">Мысли</span>
+            <span class="thought-tag">Записи</span>
+          </div>
+        </article>
+
+        <!-- Навигация -->
+        <nav class="thoughts-nav">
+          <a href="#articles" class="thoughts-nav-link">
+            <span class="thoughts-nav-arrow">←</span>
+            <span>Все размышления</span>
+          </a>
+        </nav>
+      </div>
+    </section>
+
+    <!-- LIST OF ALL ARTICLES -->
+    <section class="articles-section" id="articles">
+      <div class="container">
+        <div class="reveal">
+          <p class="section-overline">02 — Размышления</p>
+          <h2 class="section-title">Все размышления</h2>
+        </div>
+
+        <div class="articles-list">
+          <a class="article-item" href="articles/01_Архитектурные.html">
+            <div class="article-date">07.2024</div>
+            <div class="article-content">
+              <h3 class="article-title">Архитектурные заметки</h3>
+              <p class="article-excerpt">Мысль творчески — это, оказалось, довольно сложно, как и стараться придумать интерпретацию чему-то и найти новый способ это изобразить.</p>
+            </div>
+            <span class="article-arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer" id="footer">
+    <div class="container footer-inner">
+      <strong>АТ.</strong><br>
+      <small>Александра Ткачук — архитектор, BIM-мастер КР, специалист Revit / Navisworks / Renga.</small>
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=11"></script>
+</body>
+</html>
